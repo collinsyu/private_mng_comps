@@ -1,0 +1,11 @@
+{
+  "name": "umi_zjhs_mng_comps",
+  "version": "1.0.0",
+  "description": "后台常用组件维护",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yuhaiqing",
+  "license": "ISC"
+}
