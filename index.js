@@ -1,4 +1,6 @@
-module.exports = function(){
+var BasicLayout = require("./layout/BasicLayout");
 
-alert(1)
-}
+
+
+
+exports.BasicLayout = BasicLayout;
