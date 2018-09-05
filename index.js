@@ -1,4 +1,4 @@
-var BasicLayout = require("./layout/BasicLayout");
+var BasicLayout = require("./layouts/BasicLayout");
 
 
 
