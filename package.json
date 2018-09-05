@@ -1,4 +1,5 @@
 {
+
   "name": "umi_zjhs_mng_comps",
   "version": "1.0.0",
   "description": "后台常用组件维护",
@@ -7,5 +8,45 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "yuhaiqing",
-  "license": "ISC"
+  "license": "ISC",
+  "private": true,
+  "devDependencies": {
+    "@babel/preset-env": "^7.0.0-beta.36",
+    "@babel/preset-react": "^7.0.0-beta.36",
+    "babel-eslint": "^8.1.2",
+    "babel-jest": "^22.0.4",
+    "babel-plugin-dva-hmr": "^0.4.1",
+    "babel-plugin-import": "^1.6.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-es2015": "^6.24.1",
+    "cross-env": "^5.1.1",
+    "cross-port-killer": "^1.0.1",
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-16": "^1.0.2",
+    "gh-pages": "^1.0.0",
+    "husky": "^0.14.3",
+    "jest": "^22.0.4",
+    "jsdom": "^11.5.1",
+    "lint-staged": "^6.0.0",
+    "mockjs": "^1.0.1-beta3",
+    "pro-download": "^1.0.1",
+    "react-test-renderer": "^16.2.0",
+    "redbox-react": "^1.5.0",
+    "roadhog": "^2.0.5",
+    "roadhog-api-doc": "^0.3.4",
+    "rollbar": "^2.3.4",
+    "stylelint": "^8.4.0",
+    "stylelint-config-standard": "^18.0.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/env",
+      "@babel/react"
+    ],
+    "plugins": [
+      "transform-decorators-legacy",
+      "transform-class-properties"
+    ]
+  }
 }
