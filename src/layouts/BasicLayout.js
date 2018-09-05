@@ -10,12 +10,12 @@ import { enquireScreen } from 'enquire-js';
 import GlobalHeader from '../components/GlobalHeader';
 import GlobalFooter from '../components/GlobalFooter';
 import SiderMenu from '../components/SiderMenu';
-import NotFound from '../routes/Exception/404';
 import { getRoutes } from '../utils/utils';
 import Authorized from '../utils/Authorized';
 import { getMenuData } from '../common/menu';
-import logo from '../assets/unicom.svg';
 import ModifyPassModel from './ModifyPassModel';
+import Exception from '../components/Exception';
+import { Link } from 'dva/router';
 
 const { Content } = Layout;
 const { AuthorizedRoute } = Authorized;
@@ -121,11 +121,7 @@ class BasicLayout extends React.PureComponent {
     // });
   }
   handleMenuClick = ({ key }) => {
-    // if (key === 'logout') {
-    //   this.props.dispatch({
-    //     type: 'login/logout',
-    //   });
-    // }
+
     if (key === 'logout') {
       window.location.href = window.path + "logout"
     }
@@ -143,7 +139,7 @@ class BasicLayout extends React.PureComponent {
   }
   render() {
     const {
-      currentUser, collapsed, routerData, match, location,
+      currentUser, collapsed, routerData, match, location,logo
     } = this.props;
     const layout = (
       <Layout>
@@ -192,7 +188,7 @@ class BasicLayout extends React.PureComponent {
                   )
                 }
                 <Redirect exact from="/" to="/dashboard/workplace" />
-                <Route render={NotFound} />
+                <Route render={<Exception type="404" style={{ minHeight: 500, height: '80%' }} linkElement={Link} />} />
               </Switch>
             </div>
             <GlobalFooter
