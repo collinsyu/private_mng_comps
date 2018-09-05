@@ -2,15 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Layout, Icon, message } from 'antd';
 import DocumentTitle from 'react-document-title';
-import { connect } from 'dva';
-import { Route, Redirect, Switch } from 'dva/router';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import { enquireScreen } from 'enquire-js';
 import GlobalHeader from '../components/GlobalHeader';
 import GlobalFooter from '../components/GlobalFooter';
 import SiderMenu from '../components/SiderMenu';
-import { getRoutes } from '../utils/utils';
 import Authorized from '../utils/Authorized';
 import { getMenuData } from '../common/menu';
 import ModifyPassModel from './ModifyPassModel';
@@ -18,7 +15,6 @@ import Exception from '../components/Exception';
 import { Link } from 'dva/router';
 
 const { Content } = Layout;
-const { AuthorizedRoute } = Authorized;
 
 /**
  * 根据菜单取得重定向地址.
@@ -74,13 +70,7 @@ class BasicLayout extends React.PureComponent {
     isMobile,
     visible: false
   };
-  getChildContext() {
-    const { location, routerData } = this.props;
-    return {
-      location,
-      breadcrumbNameMap: routerData,
-    };
-  }
+
   componentDidMount() {
     enquireScreen((mobile) => {
       this.setState({
@@ -102,9 +92,9 @@ class BasicLayout extends React.PureComponent {
     if (typeof window.SYS_TITLE !== 'undefined') {
       title = window.SYS_TITLE;
     }
-    if (routerData[pathname] && routerData[pathname].name) {
-      title = `${routerData[pathname].name} - ${title}`;
-    }
+    // if (routerData[pathname] && routerData[pathname].name) {
+    //   title = `${routerData[pathname].name} - ${title}`;
+    // }
     return title;
   }
   handleMenuCollapse = (collapsed) => {
@@ -167,29 +157,7 @@ class BasicLayout extends React.PureComponent {
           />
           <Content style={{ margin: '24px 24px 0', height: '100%' }}>
             <div style={{ minHeight: 'calc(100vh - 260px)' }}>
-              <Switch>
-                {
-                  getRoutes(match.path, routerData).map(item =>
-                    (
-                      <AuthorizedRoute
-                        key={item.key}
-                        path={item.path}
-                        component={item.component}
-                        exact={item.exact}
-                        authority={item.authority}
-                        redirectPath="/exception/403"
-                      />
-                    )
-                  )
-                }
-                {
-                  redirectData.map(item =>
-                    <Redirect key={item.from} exact from={item.from} to={item.to} />
-                  )
-                }
-                <Redirect exact from="/" to="/dashboard/workplace" />
-                <Route render={<Exception type="404" style={{ minHeight: 500, height: '80%' }} linkElement={Link} />} />
-              </Switch>
+              {this.props.children}
             </div>
             <GlobalFooter
               copyright={
@@ -214,9 +182,4 @@ class BasicLayout extends React.PureComponent {
   }
 }
 
-export default connect(({ user, global, loading }) => ({
-  currentUser: user.currentUser,
-  collapsed: global.collapsed,
-  fetchingNotices: {},
-  notices: global.notices,
-}))(BasicLayout);
+export default BasicLayout

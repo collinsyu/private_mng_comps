@@ -12,7 +12,6 @@ import GlobalHeader from '../components/GlobalHeader';
 import GlobalFooter from '../components/GlobalFooter';
 import SiderMenu from '../components/SiderMenu';
 import NotFound from '../routes/Exception/404';
-import { getRoutes } from '../utils/utils';
 import Authorized from '../utils/Authorized';
 import { getMenuData } from '../common/menu';
 import logo from '../assets/unicom.svg';
@@ -191,29 +190,7 @@ class BasicLayout extends React.PureComponent {
             </Sider>
             <Content style={{ padding: '0 24px', margin: '24px 24px 0', height: '100%' }}>
               <div style={{ minHeight: 'calc(100vh - 195px)' }}>
-                <Switch>
-                  {
-                    getRoutes(match.path, routerData).map(item =>
-                      (
-                        <AuthorizedRoute
-                          key={item.key}
-                          path={item.path}
-                          component={item.component}
-                          exact={item.exact}
-                          authority={item.authority}
-                          redirectPath="/exception/403"
-                        />
-                      )
-                    )
-                  }
-                  {
-                    redirectData.map(item =>
-                      <Redirect key={item.from} exact from={item.from} to={item.to} />
-                    )
-                  }
-                  <Redirect exact from="/" to="/dashboard/workplace" />
-                  <Route render={NotFound} />
-                </Switch>
+                {this.props.children}
               </div>
             </Content>
           </Layout>

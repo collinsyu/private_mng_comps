@@ -9,6 +9,12 @@
     "transform-react-jsx",
     "transform-object-rest-spread",
     "transform-decorators-legacy",
-    "transform-remove-strict-mode"
+    "transform-remove-strict-mode",
+    ["transform-runtime",{
+      "helpers": false,
+      "polyfill": false,
+      "regenerator": true,
+      "moduleName": "babel-runtime"
+    }]
   ],
 }
