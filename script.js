@@ -24,7 +24,7 @@ function readDirSync(path){
         var newPath = path.replace(rootPath+"/src",rootPath+"/lib");
         // console.log("新地址是：",newPath);
         // 复制
-        fs.copyFileSync(path+"/"+ele, rootPath+"/"+ele);
+        fs.copyFileSync(path+"/"+ele, newPath+"/"+ele);
       }
 
 		}
