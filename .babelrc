@@ -1,7 +1,14 @@
 {
   "presets": [
-    ["es2015", { "modules": false }]
+
+    ["es2015", {"modules": false}],
+    "react",
+    "stage-2"
   ],
-  "plugins": ["transform-remove-strict-mode"],
-  "blacklist": ["useStrict"]
+  "plugins": [
+    "transform-react-jsx",
+    "transform-object-rest-spread",
+    "transform-decorators-legacy",
+    "transform-remove-strict-mode"
+  ],
 }

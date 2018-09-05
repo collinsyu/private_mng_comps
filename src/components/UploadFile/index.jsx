@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import { Upload, Icon,Button, message,Modal } from 'antd';
 import style from './index.less'
-
+var __window = window||{}
 export default class PicturesWall extends React.Component {
   state = {
     fileList: [],
@@ -12,12 +12,12 @@ export default class PicturesWall extends React.Component {
     console.log(nextProps);
     if (this.props.value !== nextProps.value) {
       if(nextProps.value&&nextProps.value.length !== 32) {
-        console.log(window.path+'dist/'+nextProps.value);
+        console.log(_window.path+'dist/'+nextProps.value);
         this.setState({fileList: [{
           uid: -1,
           name: 'xxx.png',
           status: 'done',
-          url: window.path+'dist/'+nextProps.value,
+          url: _window.path+'dist/'+nextProps.value,
         }]})
       }
     }
@@ -43,7 +43,7 @@ export default class PicturesWall extends React.Component {
 
   render() {
     const props = {
-      action={window.path+'upload'},
+      action:_window.path+'upload',
       onChange: this.handleChange,
       defaultFileList: [{
         uid: 1,
