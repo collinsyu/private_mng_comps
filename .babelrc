@@ -3,7 +3,7 @@
 
     ["es2015", {"modules": false}],
     "react",
-    "stage-2"
+    "stage-0"
   ],
   "plugins": [
     "transform-react-jsx",
