@@ -57,7 +57,7 @@ export default class GlobalHeader extends PureComponent {
       onNoticeVisibleChange, onMenuClick, onNoticeClear,
     } = this.props;
     const menu = (
-      <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
+      <Menu className={"menu"} selectedKeys={[]} onClick={onMenuClick}>
         <Menu.Item disabled><Icon type="user" />个人中心</Menu.Item>
         <Menu.Item disabled><Icon type="setting" />设置</Menu.Item>
         <Menu.Divider />
@@ -67,11 +67,11 @@ export default class GlobalHeader extends PureComponent {
     );
     const noticeData = this.getNoticeData();
     return (
-      <Header className={styles.header}>
+      <Header className={"_yhqmng_header"}>
         {isMobile && (
           [
             (
-              <Link to="/" className={styles.logo} key="logo">
+              <Link to="/" className={"logo"} key="logo">
                 <img src={logo} alt="logo" width="32" />
               </Link>
             ),
@@ -79,13 +79,13 @@ export default class GlobalHeader extends PureComponent {
           ]
         )}
         <Icon
-          className={styles.trigger}
+          className={"trigger"}
           type={collapsed ? 'menu-unfold' : 'menu-fold'}
           onClick={this.toggle}
         />
-        <div className={styles.right}>
+        <div className={"right"}>
           <HeaderSearch
-            className={`${styles.action} ${styles.search}`}
+            className={`action search`}
             placeholder="站内搜索"
             dataSource={['搜索提示一', '搜索提示二', '搜索提示三']}
             onSearch={(value) => {
@@ -96,7 +96,7 @@ export default class GlobalHeader extends PureComponent {
             }}
           />
           <NoticeIcon
-            className={styles.action}
+            className={"action"}
             count={currentUser.notifyCount}
             onItemClick={(item, tabProps) => {
               console.log(item, tabProps); // eslint-disable-line
@@ -127,9 +127,9 @@ export default class GlobalHeader extends PureComponent {
           </NoticeIcon>
           {currentUser.name ? (
             <Dropdown overlay={menu}>
-              <span className={`${styles.action} ${styles.account}`}>
-                <Avatar size="small" className={styles.avatar} src={currentUser.avatar} />
-                <span className={styles.name}>{currentUser.name}</span>
+              <span className={`action account`}>
+                <Avatar size="small" className={"avatar"} src={currentUser.avatar} />
+                <span className={"name"}>{currentUser.name}</span>
               </span>
             </Dropdown>
           ) : <Spin size="small" style={{ marginLeft: 8 }} />}
