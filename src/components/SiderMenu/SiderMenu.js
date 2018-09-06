@@ -218,6 +218,9 @@ export default class SiderMenu extends PureComponent {
         >
           {this.getNavMenuItems(this.menus)}
         </Menu>
+        <style>{`
+
+        `}</style>
       </Sider>
     );
   }
