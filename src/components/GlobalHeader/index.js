@@ -6,7 +6,6 @@ import Debounce from 'lodash-decorators/debounce';
 import { Link } from 'dva/router';
 import NoticeIcon from '../NoticeIcon';
 import HeaderSearch from '../HeaderSearch';
-import styles from './index.less';
 
 const { Header } = Layout;
 
@@ -135,6 +134,111 @@ export default class GlobalHeader extends PureComponent {
             </Dropdown>
           ) : <Spin size="small" style={{ marginLeft: 8 }} />}
         </div>
+        <style>{`
+          ._yhqmng_header {
+            padding: 0 12px 0 0;
+            background: #fff;
+            box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+            position: relative;
+          }
+          ._yhqmng_header .ant-layout {
+            overflow-x: hidden;
+          }
+          ._yhqmng_header .ant-layout-header {
+            height: 54px;
+            line-height: 54px;
+          }
+          ._yhqmng_header .logo {
+            height: 50px;
+            line-height: 58px;
+            vertical-align: top;
+            display: inline-block;
+            padding: 0 0 0 24px;
+            cursor: pointer;
+            font-size: 20px;
+
+          }
+          ._yhqmng_header .logo img {
+            display: inline-block;
+            vertical-align: middle;
+          }
+          ._yhqmng_header .menu .anticon{
+
+            margin-right: 8px;
+          }
+          ._yhqmng_header .menu .anticon{
+            width: 160px;
+          }
+          ._yhqmng_header i.trigger {
+            font-size: 20px;
+            line-height: 64px;
+            cursor: pointer;
+            transition: all .3s, padding 0s;
+            padding: 0 24px;
+          }
+          ._yhqmng_header .right {
+            float: right;
+            height: 100%;
+
+          }
+          ._yhqmng_header .right .action {
+            cursor: pointer;
+            padding: 0 12px;
+            display: inline-block;
+            transition: all .3s;
+            height: 100%;
+          }
+          ._yhqmng_header .right .action > i {
+            font-size: 16px;
+            vertical-align: middle;
+          }
+          ._yhqmng_header .right .action:hover,
+          ._yhqmng_header .right .action .ant-popover-open{
+            background: #e6f7ff;
+          }
+
+          ._yhqmng_header .right .search {
+            padding: 0;
+            margin: 0 12px;
+          }
+          ._yhqmng_header .right .search:hover {
+            background: transparent;
+          }
+          ._yhqmng_header .right .account .avatar {
+            margin: 20px 8px 20px 0;
+            color: #1890ff;
+            background: rgba(255, 255, 255, .85);
+            vertical-align: middle;
+          }
+
+          @media only screen and (max-width: @screen-md) {
+
+            ._yhqmng_header .header .ant-divider-vertical{
+              vertical-align: unset;
+            }
+            ._yhqmng_header .header .name {
+              display: none;
+            }
+            ._yhqmng_header .header i.trigger {
+              padding: 0 12px;
+            }
+            ._yhqmng_header .header .logo {
+              padding-right: 12px;
+              position: relative;
+            }
+            ._yhqmng_header .header .right {
+              position: absolute;
+              right: 12px;
+              top: 0;
+              background: #fff;
+
+            }
+            ._yhqmng_header .header .right .account .avatar {
+              margin-right: 0;
+            }
+          }
+
+        `}</style>
       </Header>
     );
   }
