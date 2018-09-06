@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import { Link } from 'dva/router';
-import styles from './index.less';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -12,7 +11,7 @@ const { SubMenu } = Menu;
 //   icon: <Icon type="setting" />,
 const getIcon = (icon) => {
   if (typeof icon === 'string' && icon.indexOf('http') === 0) {
-    return <img src={icon} alt="icon" className={styles.icon} />;
+    return <img src={icon} alt="icon" className={"_yhqmng_icon"} />;
   }
   if (typeof icon === 'string') {
     return <Icon type={icon} />;
@@ -198,10 +197,10 @@ export default class SiderMenu extends PureComponent {
         breakpoint="md"
         onCollapse={onCollapse}
         width={226}
-        className={styles.sider}
+        className={"_yhqmng_sider"}
 
       >
-        <div className={styles.logo} key="logo">
+        <div className={"_yhqmng_logo"} key="logo">
           <Link to="/">
             <img src={logo} alt="logo" />
             <h1>{window.SYS_TITLE}</h1>
@@ -219,7 +218,45 @@ export default class SiderMenu extends PureComponent {
           {this.getNavMenuItems(this.menus)}
         </Menu>
         <style>{`
+          ._yhqmng_logo {
+            height: 54px;
+            position: relative;
+            line-height: 54px;
+            padding-left: 24px;
+            transition: all .3s;
+            background: #002140;
+            overflow: hidden;
 
+
+          }
+          ._yhqmng_logo img {
+            display: inline-block;
+            vertical-align: middle;
+            height: 32px;
+          }
+          ._yhqmng_logo h1 {
+            color: #fff;
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 20px;
+            margin: 0 0 0 12px;
+            font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+            font-weight: 600;
+          }
+          ._yhqmng_sider {
+            min-height: 100vh;
+            box-shadow: 2px 0 6px rgba(0, 21, 41, .35);
+            position: relative;
+            z-index: 10;
+          }
+
+          ._yhqmng_icon {
+            width: 14px;
+            margin-right: 10px;
+          }
+          .drawer .drawer-content {
+            background: #001529;
+          }
         `}</style>
       </Sider>
     );
