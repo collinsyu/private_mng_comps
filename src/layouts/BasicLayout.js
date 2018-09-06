@@ -73,6 +73,7 @@ class BasicLayout extends React.PureComponent {
 
   componentDidMount() {
     enquireScreen((mobile) => {
+      console.log("mobile",mobile);
       this.setState({
         isMobile: mobile,
       });
