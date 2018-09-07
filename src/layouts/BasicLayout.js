@@ -5,7 +5,7 @@ import DocumentTitle from 'react-document-title';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import { enquireScreen } from 'enquire-js';
-import {GlobalHeader,GlobalFooter,SiderMenu,Exception} from 'ant-design-pro';
+import {GlobalHeader,GlobalFooter,SiderMenu,Exception} from '../antdpro';
 import { getMenuData } from '../common/menu';
 import ModifyPassModel from './ModifyPassModel';
 import { Link } from 'dva/router';
