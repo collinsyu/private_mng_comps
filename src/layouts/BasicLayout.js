@@ -10,6 +10,7 @@ import { getMenuData } from '../common/menu';
 import ModifyPassModel from './ModifyPassModel';
 import Exception from '../components/Exception';
 import { Link } from 'dva/router';
+import {PageHeaderLayout} from './PageHeaderLayout';
 
 const { Content } = Layout;
 
@@ -151,7 +152,9 @@ class BasicLayout extends React.PureComponent {
           />
           <Content style={{ margin: '24px 24px 0', height: '100%' }}>
             <div style={{ minHeight: 'calc(100vh - 260px)' }}>
-              {this.props.children}
+              <PageHeaderLayout {...this.props}/>
+
+                {/* {this.props.children} */}
             </div>
             <GlobalFooter
               copyright={

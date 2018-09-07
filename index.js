@@ -1,6 +1,5 @@
 // 组件
 export { default as BasicLayout } from './lib/layouts/BasicLayout';
-export { default as PageHeaderLayout } from './lib/layouts/PageHeaderLayout';
 
 
 
