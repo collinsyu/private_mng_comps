@@ -51,6 +51,7 @@
     "babel-cli": "^6.18.0",
     "babel-eslint": "^8.1.2",
     "babel-jest": "^22.0.4",
+    "babel-plugin-css-modules-transform": "^1.6.1",
     "babel-plugin-dva-hmr": "^0.4.1",
     "babel-plugin-import": "^1.6.3",
     "babel-plugin-transform-class-properties": "^6.24.1",

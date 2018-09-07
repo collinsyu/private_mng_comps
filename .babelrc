@@ -16,6 +16,24 @@
       "polyfill": false,
       "regenerator": true,
       "moduleName": "babel-runtime"
-    }]
+    }],
+
+    "add-module-exports",
+    [
+      "css-modules-transform",
+      {
+        "extensions": [
+          ".less"
+        ],
+        "generateScopedName": "./css-module.js"
+      }
+    ],
+    [
+      "import",
+      {
+        "libraryName": "antd"
+      }
+    ]
+
   ],
 }
