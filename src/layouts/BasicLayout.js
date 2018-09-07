@@ -151,9 +151,9 @@ class BasicLayout extends React.PureComponent {
           />
           <Content style={{ margin: '24px 24px 0', height: '100%' }}>
             <div style={{ minHeight: 'calc(100vh - 260px)' }}>
-              <PageHeaderLayout {...this.props}/>
+              {/* <PageHeaderLayout {...this.props}/> */}
 
-                {/* {this.props.children} */}
+                {this.props.children}
             </div>
             <GlobalFooter
               copyright={
