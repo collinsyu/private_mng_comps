@@ -17,8 +17,6 @@
       "regenerator": true,
       "moduleName": "babel-runtime"
     }],
-
-    "add-module-exports",
     [
       "css-modules-transform",
       {
@@ -28,12 +26,6 @@
         "generateScopedName": "./css-module.js"
       }
     ],
-    [
-      "import",
-      {
-        "libraryName": "antd"
-      }
-    ]
 
   ],
 }
