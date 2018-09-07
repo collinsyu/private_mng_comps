@@ -11,21 +11,18 @@
     "transform-decorators-legacy",
     "transform-remove-strict-mode",
     ["import", { "libraryName": "antd", "style": true }],
+    ["import",  {
+        "libraryName": "ant-design-pro",
+        "libraryDirectory": "lib",
+        "style": true,
+        "camel2DashComponentName": false,
+    }],
     ["transform-runtime",{
       "helpers": false,
       "polyfill": false,
       "regenerator": true,
       "moduleName": "babel-runtime"
     }],
-    [
-      "css-modules-transform",
-      {
-        "extensions": [
-          ".less"
-        ],
-        "generateScopedName": "./css-module.js"
-      }
-    ],
 
   ],
 }

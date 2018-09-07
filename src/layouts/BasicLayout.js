@@ -5,10 +5,7 @@ import DocumentTitle from 'react-document-title';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import { enquireScreen } from 'enquire-js';
-import GlobalHeader from '../components/GlobalHeader';
-import GlobalFooter from '../components/GlobalFooter';
-import SiderMenu from '../components/SiderMenu';
-import Authorized from '../utils/Authorized';
+import {GlobalHeader,GlobalFooter,SiderMenu} from 'ant-design-pro';
 import { getMenuData } from '../common/menu';
 import ModifyPassModel from './ModifyPassModel';
 import Exception from '../components/Exception';
@@ -136,10 +133,6 @@ class BasicLayout extends React.PureComponent {
       <Layout>
         <SiderMenu
           logo={logo}
-          // 不带Authorized参数的情况下如果没有权限,会强制跳到403界面
-          // If you do not have the Authorized parameter
-          // you will be forced to jump to the 403 interface without permission
-          Authorized={Authorized}
           menuData={getMenuData()}
           collapsed={collapsed}
           location={location}

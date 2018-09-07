@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf lib && mkdir lib",
-    "cpless":"node script.js",
+    "cpless": "node script.js",
     "lib": "npm run clean && babel src --out-dir lib"
   },
   "files": [
@@ -17,12 +17,12 @@
   "dependencies": {
     "@antv/data-set": "^0.8.0",
     "@babel/polyfill": "^7.0.0-beta.36",
+    "ant-design-pro": "^1.4.4",
     "antd": "^3.8.1",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.9.2",
     "bizcharts": "^3.1.0-beta.4",
     "bizcharts-plugin-slider": "^2.0.1",
-    "react-copy-to-clipboard": "^5.0.1",
     "classnames": "^2.2.5",
     "dva": "^2.1.0",
     "dva-loading": "^1.0.4",
@@ -42,6 +42,7 @@
     "rc-tween-one": "^1.5.8",
     "react": "^16.2.0",
     "react-container-query": "^0.9.1",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-document-title": "^2.0.3",
     "react-dom": "^16.2.0",
     "react-fittext": "^1.0.0"
