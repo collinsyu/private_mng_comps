@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Form, Input, Modal, message} from 'antd';
-import * as service from '../services/users';
 const FormItem = Form.Item;
 
 
@@ -27,15 +26,15 @@ class ModifyPassModel extends Component {
           ...values
         };
 
-        service.password(reqData).then((data) => {
-          if (data && !data.data.success) {
-            message.error(data.data.resultView);
-          } else {
-            this.props.hideModelHandler();
-            message.info('修改密码成功！');
-            window.location.href = window.path + "logout"
-          }
-        })
+        // service.password(reqData).then((data) => {
+        //   if (data && !data.data.success) {
+        //     message.error(data.data.resultView);
+        //   } else {
+        //     this.props.hideModelHandler();
+        //     message.info('修改密码成功！');
+        //     window.location.href = window.path + "logout"
+        //   }
+        // })
 
         //dispatch({type: `accounts/${modalType}`, payload: data});
 
@@ -56,13 +55,7 @@ class ModifyPassModel extends Component {
     if (value && this.state.confirmDirty) {
       form.validateFields(['confirm'], {force: true});
     }
-
-    let re = /(?=^.{6,32}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
-    if (value&&!re.test(value)) {
-      callback('密码必须同时包含大写字母、小写字母、符号、数字且不低于6位!');
-    }else{
-      callback();
-    }
+    callback();
   }
 
   handleConfirmBlur = (e) => {

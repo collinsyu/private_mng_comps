@@ -1,6 +1,10 @@
 import fetch from 'dva/fetch';
 import { notification } from 'antd';
 
+function isDev() {
+  return /localhost/gi.test(window.location.host) || /10\.(\d+)\.(\d+)\.(\d+)/gi.test(window.location.host) || /127\.0\.0\.1\./gi.test(window.location.host)
+};
+
 const codeMessage = {
   200: '服务器成功返回请求的数据',
   201: '新建或修改数据成功。',
@@ -41,6 +45,9 @@ function checkStatus(response) {
  * @return {object}           An object containing either "data" or "err"
  */
 export default function request(url, options) {
+  if(isDev()){
+    url = window.path + "/" +url;
+  }
   const defaultOptions = {
     credentials: 'include',
   };

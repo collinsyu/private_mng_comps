@@ -18,10 +18,10 @@ class RangePickerX extends Component {
 
     const _props = {
       ranges:ranges,
-      style:{width: 180},
+      style:{width: "100%"},
       ...this.props
     };
-
+    // console.log(this.props);
     return (
       <div>
         <RangePicker {..._props} />

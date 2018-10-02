@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Layout, Icon, message } from 'antd';
-import DocumentTitle from 'react-document-title';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import { enquireScreen } from 'enquire-js';
-import {GlobalHeader,GlobalFooter,SiderMenu,Exception} from '../antdpro';
+import GlobalHeader from '../components/GlobalHeader';
+import GlobalFooter from '../components/GlobalFooter';
+import SiderMenu from '../components/SiderMenu';
 import { getMenuData } from '../common/menu';
 import ModifyPassModel from './ModifyPassModel';
-import { Link } from 'dva/router';
-import {PageHeaderLayout} from './PageHeaderLayout';
 
 const { Content } = Layout;
 
@@ -61,16 +60,22 @@ enquireScreen((b) => {
 class BasicLayout extends React.PureComponent {
   static childContextTypes = {
     location: PropTypes.object,
-    breadcrumbNameMap: PropTypes.object,
+    breadcrumbNameMap: PropTypes.array,
   }
   state = {
     isMobile,
-    visible: false
+    visible: false,
+    collapsed:false,
   };
-
+  getChildContext() {
+    const { location, menuData } = this.props;
+    return {
+      location,
+      breadcrumbNameMap: menuData,
+    };
+  }
   componentDidMount() {
     enquireScreen((mobile) => {
-      console.log("mobile",mobile);
       this.setState({
         isMobile: mobile,
       });
@@ -83,23 +88,9 @@ class BasicLayout extends React.PureComponent {
     this.setState({ visible: false });
   };
 
-  getPageTitle() {
-    const { routerData, location } = this.props;
-    const { pathname } = location;
-    let title = 'Ant Design Pro';
-    if (typeof window.SYS_TITLE !== 'undefined') {
-      title = window.SYS_TITLE;
-    }
-    // if (routerData[pathname] && routerData[pathname].name) {
-    //   title = `${routerData[pathname].name} - ${title}`;
-    // }
-    return title;
-  }
+
   handleMenuCollapse = (collapsed) => {
-    // this.props.dispatch({
-    //   type: 'global/changeLayoutCollapsed',
-    //   payload: collapsed,
-    // });
+    this.setState({collapsed})
   }
   handleNoticeClear = (type) => {
     message.success(`清空了${type}`);
@@ -109,7 +100,11 @@ class BasicLayout extends React.PureComponent {
     // });
   }
   handleMenuClick = ({ key }) => {
-
+    // if (key === 'logout') {
+    //   this.props.dispatch({
+    //     type: 'login/logout',
+    //   });
+    // }
     if (key === 'logout') {
       window.location.href = window.path + "logout"
     }
@@ -118,17 +113,18 @@ class BasicLayout extends React.PureComponent {
         this.setState({ visible: true });
     }
   }
-  handleNoticeVisibleChange = (visible) => {
-    // if (visible) {
-    //   this.props.dispatch({
-    //     type: 'global/fetchNotices',
-    //   });
-    // }
-  }
+  // handleNoticeVisibleChange = (visible) => {
+  //   // if (visible) {
+  //   //   this.props.dispatch({
+  //   //     type: 'global/fetchNotices',
+  //   //   });
+  //   // }
+  // }
   render() {
     const {
-      currentUser, collapsed, routerData, match, location,logo
+      currentUser, match, location,logo
     } = this.props;
+    const { collapsed } = this.state;
     const layout = (
       <Layout>
         <SiderMenu
@@ -142,18 +138,17 @@ class BasicLayout extends React.PureComponent {
         <Layout>
           <GlobalHeader
             logo={logo}
+            collapsed={collapsed}
             currentUser={currentUser}
             isMobile={this.state.isMobile}
             onNoticeClear={this.handleNoticeClear}
             onCollapse={this.handleMenuCollapse}
             onMenuClick={this.handleMenuClick}
-            onNoticeVisibleChange={this.handleNoticeVisibleChange}
+            // onNoticeVisibleChange={this.handleNoticeVisibleChange}
           />
           <Content style={{ margin: '24px 24px 0', height: '100%' }}>
             <div style={{ minHeight: 'calc(100vh - 260px)' }}>
-              {/* <PageHeaderLayout {...this.props}/> */}
-
-                {this.props.children}
+              {this.props.children}
             </div>
             <GlobalFooter
               copyright={
@@ -169,13 +164,13 @@ class BasicLayout extends React.PureComponent {
     );
 
     return (
-      <DocumentTitle title={this.getPageTitle()}>
+
         <ContainerQuery query={query}>
           {params => <div className={classNames(params)}>{layout}</div>}
         </ContainerQuery>
-      </DocumentTitle>
+
     );
   }
 }
 
-export default BasicLayout
+export default BasicLayout;

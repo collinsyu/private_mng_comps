@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { Icon } from 'antd'
 import QueueAnim from 'rc-queue-anim';
-import TweenOne from 'rc-tween-one';
 import style from './SlipOutModal.less'
 
 class SlipOutModal extends Component {

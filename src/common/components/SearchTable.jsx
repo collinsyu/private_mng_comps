@@ -19,7 +19,8 @@ class SearchTable extends Component {
 
   componentDidMount() {
     //组件出现前 就是dom还没有渲染到html文档里面，执行页面数据请求
-    this.getTableData({});
+    const data = {...this.props.params};
+    this.getTableData(data);
   }
 
   getTableData(params) {
@@ -43,7 +44,8 @@ class SearchTable extends Component {
       ...query,
       page: pagination.current,
       sortField: sorter.field,
-      sortOrder: sorter.order
+      sortOrder: sorter.order,
+      ...this.props.params
     }
     this.getTableData(queryData);
   };
@@ -89,7 +91,7 @@ class SearchTable extends Component {
     return (
       <div>
         <Form layout="inline" onSubmit={this.handleSubmit}>
-          {this.props.formitem.map(item => <FormItemX key={item.name} {...item} {...itemOpts} />)}
+          {this.props.formitem && this.props.formitem.map(item => <FormItemX key={item.name} {...item} {...itemOpts} />)}
 
           <Button style={{
             marginRight: '10px'

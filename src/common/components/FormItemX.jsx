@@ -58,8 +58,8 @@ class FormItemX extends Component {
             });
             break;
           default:
-
         }
+        return '';
       })
     }
 
@@ -88,7 +88,7 @@ class FormItemX extends Component {
         fieldName: this.props.name,
         value: value
       };
-      query('companys/exists',reqData).then((data) => {
+      query(`${this.props.pathname}/exists`,reqData).then((data) => {
         if (data && !data.data.success) {
           callback(data.data.resultView);
         } else {
@@ -103,8 +103,18 @@ class FormItemX extends Component {
   }
 
   transformSelectX = (props) => {
+  //debugger
     // const obj2 = {...obj1}; 属于对象浅拷贝
-    let opts = {...props.typeOpts};
+    // let opts = {...props.typeOpts};
+    let opts = JSON.parse(JSON.stringify(props.typeOpts));
+
+    if(this.props.modalType === 'update') {
+      const { modifyDisabled=false } = this.props;
+      if(modifyDisabled) {
+        // debugger
+        opts.disabled=true;
+      }
+    }
 
     if(!props.typeOpts['typeName']) {
       opts.typeName = this.props.name;
@@ -115,8 +125,9 @@ class FormItemX extends Component {
     if(props.mode) {
       opts.mode = props.mode;
     }
+    // debugger;
     const placeholder = `请选择${props.label}`;
-    return <SelectX {...opts} placeholder={placeholder} onSelect={(value)=>props.onChange&&props.onChange(props.name,value)}/>;
+    return <SelectX {...opts} placeholder={placeholder} onSelect={(value)=>props.onChange&&props.onChange(props.name,value)} onBlur={(value)=>props.onBlur&&props.onBlur(props.name,value)} />;
   };
   transformRangePickerX = (props) => {
     // const obj2 = {...obj1}; 属于对象浅拷贝
@@ -133,7 +144,7 @@ class FormItemX extends Component {
       //设置默认值
       type = 'input';
     }
-    let typeOpts = this.props.typeOpts;
+    let typeOpts = JSON.parse(JSON.stringify(this.props.typeOpts));
     if(!typeOpts) {
       typeOpts = {};
     }
@@ -148,44 +159,37 @@ class FormItemX extends Component {
         delete itOpts.all;
         delete itOpts.typeName;
         return <Input {...itOpts} placeholder={placeholder}/>;
-        break;
+
       case 'select':
         let stOpts = {...typeOpts};
         delete stOpts.all;
         delete stOpts.typeName;
         placeholder = `请选择${this.props.label}`;
-        return <Input {...stOpts} placeholder={placeholder}/>;
-        break;
+        return <Input {...stOpts} placeholder={placeholder} onBlur={(value)=>this.props.onBlur&&this.props.onBlur(this.props.name,value.target.value)} onChange={(value)=>this.props.onChange&&this.props.onChange(this.props.name,value.target.value)}/>;
+
       case 'selectx':
         return this.transformSelectX(this.props);
-        break;
       case 'number':
         let inOpts = {...typeOpts};
         delete inOpts.all;
         delete inOpts.typeName;
         placeholder = `请输入${this.props.label}`;
         return <InputNumber {...inOpts} placeholder={placeholder} />;
-        break;
       case 'checkboxx':
         placeholder = `请选择${this.props.label}`;
         typeOpts.typeName = this.props.name;
         return <CheckboxX {...typeOpts} onChange={(value)=>this.props.onChange&&this.props.onChange(this.props.name,value)}/>;
-        break;
       case 'radiox':
         placeholder = `请选择${this.props.label}`;
         typeOpts.typeName = this.props.name;
         return <RadioX {...typeOpts} onChange={(value)=>this.props.onChange&&this.props.onChange(this.props.name,value.target.value)}/>;
-        break;
       case 'rangepickerx':
         return this.transformRangePickerX(this.props);
-        break;
       case 'datepicker':
         return <DatePicker {...typeOpts}  placeholder={placeholder}/>;
-        break;
       case 'textarea':
         let {rows} = this.props;
         return <TextArea rows={rows}  placeholder={placeholder}/>;
-        break;
       case 'upload':
         const uploadFileprops = {
           action: window.path+'upload',
@@ -196,9 +200,7 @@ class FormItemX extends Component {
           accept:'',
           ...this.props.uploadProps
         };
-        {/*<p><a href={tempFile}>下载模板文件</a> 仅支持xlsx,xls格式的文件.</p>*/}
         return <Upload {...uploadFileprops}><Button type="ghost"><Icon type="upload" />点击上传文件</Button></Upload>;
-        break;
       case 'treeselect':
         let treeData = [];
         const {data} = this.props.typeOpts;
@@ -208,21 +210,34 @@ class FormItemX extends Component {
         const treeProps = {
           dropdownStyle:{ maxHeight: 400, overflow: 'auto' },
           treeData,
+          allowClear:true,
           placeholder,
           ...this.props.treeProps
         };
-        return <TreeSelect showSearch treeNodeFilterProp="pinyin"  {...treeProps} />;
-        break;
+        return <TreeSelect showSearch treeNodeFilterProp="pinyin"  {...treeProps} onChange={(value)=>this.props.onChange&&this.props.onChange(this.props.name,value)} />;
+
 
       case 'uploadimagex':
-        return <UploadImageX />;
-        break;
+        let uiOpts = {...typeOpts};
+        delete uiOpts.all;
+        delete uiOpts.typeName;
+        return <UploadImageX {...uiOpts}/>;
 
+      case 'null':
+        return [];
+        break;
       default:
         let ooOpts = {...typeOpts};
         delete ooOpts.all;
         delete ooOpts.typeName;
-        return <Input {...ooOpts} placeholder={placeholder} onKeyUp={(value)=>this.props.onKeyUp&&this.props.onKeyUp(this.props.name,value.target.value)}/>;
+        if(this.props.modalType === 'update') {
+          const { modifyDisabled=false } = this.props;
+          if(modifyDisabled) {
+            ooOpts.disabled=true;
+          }
+        }
+
+        return <Input {...ooOpts} placeholder={placeholder} onBlur={(value)=>this.props.onBlur&&this.props.onBlur(this.props.name,value.target.value)} onChange={(value)=>this.props.onChange&&this.props.onChange(this.props.name,value.target.value)} onKeyUp={(value)=>this.props.onKeyUp&&this.props.onKeyUp(this.props.name,value.target.value)}/>;
     }
   }
 
@@ -274,7 +289,7 @@ class FormItemX extends Component {
         ..._formItemLayout
       }
     }
-    const { modifyDisplay = true, } = this.props;
+    const { modifyDisplay = true,modifyText=false, modifyDisabled=false } = this.props;
     const authCode = this.props.useName + '.' + this.props.name;
     let display = getAuth(authCode);
     if(display) {
@@ -283,14 +298,34 @@ class FormItemX extends Component {
       }
 
     }
+    let isText = this.props.type==='text';
+    if(this.props.modalType === 'update') {
+
+        isText =  modifyText;
+    }
+
+
+
     return (display ?
       <FormItem {...defaultOpts} {...this.props}>
-      {this.props.type==='text'?initValue:
+        {isText?initValue:
+          (this.props.type==='null'?
+          this.props.children:
+          this.props.getFieldDecorator(this.props.name, {
+              rules: this.getRules(),
+              initialValue: initValue || undefined
+          })(this.getFormItem())
+        )
+
+        }
+        {/* {isText?initValue:
         this.props.getFieldDecorator(this.props.name, {
             rules: this.getRules(),
             initialValue: initValue || undefined
+            //validator: this.props.validate?this.props.validate:null,
         })(this.getFormItem())
-      }
+      } */}
+
       </FormItem>
       :<span/>
     );
