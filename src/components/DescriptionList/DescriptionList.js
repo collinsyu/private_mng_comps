@@ -4,7 +4,7 @@ import { Row } from 'antd';
 
 export default ({ className, title, col = 3, layout = 'horizontal', gutter = 32,
   children, size, ...restProps }) => {
-  const clsString = classNames("_yhq_descriptionList", styles[layout], className, {
+  const clsString = classNames("_yhq_descriptionList", layout, className, {
     ["_yhq_small"]: size === 'small',
     ["_yhq_large"]: size === 'large',
   });

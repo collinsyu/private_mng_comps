@@ -20,22 +20,22 @@ class Drawer extends PureComponent {
 
   render() {
     return (
-      <div className={style.drawer}>
+      <div className={"_yhq_drawer"}>
         <QueueAnim key="drawer" type={['right', 'right']} ease={['easeOutQuart', 'easeInOutQuart']}>
           {this.props.visible
             ? (
-              <div key='absolute' className={style.absolute}>
-                <div className={style.masklayer} onClick={this.props.onCancel}></div>
-                <div className={style.container}>
-                  <div className={style.head}>
-                    <span className={style.title}>{this.state.title}</span>
-                    <Icon onClick={this.props.onCancel} className={style.close} type="cross"/>
+              <div key='absolute' className={"_yhq_absolute"}>
+                <div className={"_yhq_masklayer"} onClick={this.props.onCancel}></div>
+                <div className={"_yhq_container"}>
+                  <div className={"_yhq_head"}>
+                    <span className={"_yhq_title"}>{this.state.title}</span>
+                    <Icon onClick={this.props.onCancel} className={"_yhq_close"} type="cross"/>
 
                   </div>
-                  <div className={style.body} style={{maxHeight: document.body.clientHeight-(this.props.footString?80:40)}}>
+                  <div className={"_yhq_body"} style={{maxHeight: document.body.clientHeight-(this.props.footString?80:40)}}>
                     {this.props.children}
                   </div>
-                  {this.props.footString?<div className={style.foot}>
+                  {this.props.footString?<div className={"_yhq_foot"}>
                     {this.props.footString}
                   </div>:null}
 
