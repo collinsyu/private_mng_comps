@@ -24,9 +24,10 @@ export { default as EditableCell } from './lib/common/components/EditableCell';
 export { default as SearchTree } from './lib/common/components/SearchTree';
 
 
-
-
-
+// 官方组件
+export { default as DescriptionList } from './lib/components/DescriptionList';
+export { default as Ellipsis } from './lib/components/Ellipsis';
+export { default as Drawer } from './lib/components/Drawer';
 
 
 

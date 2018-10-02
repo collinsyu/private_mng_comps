@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Tooltip } from 'antd';
 import classNames from 'classnames';
-import styles from './index.less';
 
 /* eslint react/no-did-mount-set-state: 0 */
 /* eslint no-param-reassign: 0 */
@@ -152,9 +151,9 @@ export default class Ellipsis extends Component {
       ...restProps
     } = this.props;
 
-    const cls = classNames(styles.ellipsis, className, {
-      [styles.lines]: (lines && !isSupportLineClamp),
-      [styles.lineClamp]: (lines && isSupportLineClamp),
+    const cls = classNames("_yhq_ellipsis", className, {
+      ["_yhq_lines"]: (lines && !isSupportLineClamp),
+      ["_yhq_lineClamp"]: (lines && isSupportLineClamp),
     });
 
     if (!lines && !length) {
@@ -205,13 +204,38 @@ export default class Ellipsis extends Component {
               <Tooltip title={text}>{childNode}</Tooltip>
             ) : childNode
           }
-          <div className={styles.shadow} ref={this.handleShadowChildren}>{children}</div>
-          <div className={styles.shadow} ref={this.handleShadow}><span>{text}</span></div>
+          <div className={"_yhq_shadow"} ref={this.handleShadowChildren}>{children}</div>
+          <div className={"_yhq_shadow"} ref={this.handleShadow}><span>{text}</span></div>
         </div>
         <style>
           {`
             pre {
                 white-space: normal;
+            }
+            ._yhq_ellipsis {
+              overflow: hidden;
+              display: inline-block;
+              word-break: break-all;
+              width: 100%;
+            }
+
+            ._yhq_lines {
+              position: relative;
+
+            }
+            .lines ._yhq_shadow {
+              display: block;
+              position: relative;
+              color: transparent;
+              opacity: 0;
+              z-index: -999;
+            }
+            ._yhq_lineClamp {
+              position: relative;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
             }
           `}
         </style>
