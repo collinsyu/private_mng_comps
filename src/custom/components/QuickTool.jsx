@@ -1,6 +1,6 @@
 import React from 'react';
 import {message,Popconfirm} from 'antd';
-import {patch} from '../utils/request';
+import {patch} from '../../utils/request';
 import AuthA from './AuthA';
 /**
  * 快捷操作工具，删除，冻结等场景，主要是单向与服务器交互

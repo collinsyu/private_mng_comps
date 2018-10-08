@@ -8,7 +8,7 @@ import {formItemLayout} from '../constants'
 import {getAuth} from '../tool';
 import moment from 'moment';
 import UploadImageX from './UploadImageX';
-import { query } from '../utils/request';
+import { query } from '../../utils/request';
 
 const { TextArea } = Input;
 const FormItem = Form.Item;

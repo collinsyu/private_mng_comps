@@ -4,7 +4,7 @@
 ## 目前可用组件有
 
 ### `layouts`
-* BasicLayout
+* [BasicLayout](src/layouts/BasicLayout/index.md)
 * PageHeaderLayout
 
 ###  `components`
@@ -39,7 +39,7 @@
 
 ### `方法 utils`
 * [request](src/utils/request/index.md)
-* filterQueryData
+* [filterQueryData](src/utils/queryTool/index.md)
 
 
 

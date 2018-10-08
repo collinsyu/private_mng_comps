@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {Table,Form,Button} from 'antd';
 import {getAuthColumn} from '../tool';
-import {query} from '../utils/request';
+import {query} from '../../utils/request';
 import {FormItemX} from '../components';
-import {filterQueryData} from '../queryTool';
+import {filterQueryData} from '../../utils/queryTool';
 /**
  * 对table组件进行了扩展，增加了权限控制
  * 带查询与分页，应用在小的空间内使用表格
