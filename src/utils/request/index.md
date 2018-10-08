@@ -7,9 +7,10 @@
 ## API
 
 
-* `request`
+`request`
 
 ### 例子：
+
 ```
 request(url,options).then(...)
 
@@ -20,8 +21,10 @@ request(url,options).then(...)
 后面的方法都是基于request 更具体的方法；
 ***
 
-* `query`
+`query`
+
 ### 例子：
+
 ```
 
 <!-- 其实就是get请求 -->
@@ -32,16 +35,20 @@ query(url,params).then(...)
 ```
 
 
-* `create`
+`create`
+
 ### 例子：
+
 ```
 <!--  其实就是post 请求，名字先这样定义吧，以后再正 -->
 create(url,params).then(...)；
 
 ```
 
-* `donew`
+`donew`
+
 ### 例子：
+
 ```
 懵逼！
 请不要使用这个方法！！！
@@ -49,8 +56,10 @@ create(url,params).then(...)；
 太细致的方法， 请到项目model中自定义
 ```
 
-* `show`
+`show`
+
 ### 例子：
+
 ```
 懵逼！
 请不要使用这个方法！！！
@@ -58,8 +67,10 @@ create(url,params).then(...)；
 太细致的方法， 请到项目model中自定义
 ```
 
-* `edit`
+`edit`
+
 ### 例子：
+
 ```
 懵逼！
 请不要使用这个方法！！！
@@ -67,8 +78,10 @@ create(url,params).then(...)；
 太细致的方法， 请到项目model中自定义
 ```
 
-* `remove`
+`remove`
+
 ### 例子：
+
 ```
 
 remove(url,params).then(...)；
@@ -77,8 +90,10 @@ remove(url,params).then(...)；
 <!--  该方法为delete，params应为对象 -->
 ```
 
-* `patch`
+`patch`
+
 ### 例子：
+
 ```
 
 patch(url,params).then(...)
@@ -87,8 +102,10 @@ patch(url,params).then(...)
 <!--  该方法为patch，params应为对象 -->
 ```
 
-* `update`
+`update`
+
 ### 例子：
+
 ```
 update(url,params).then(...)
 
