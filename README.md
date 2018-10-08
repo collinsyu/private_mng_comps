@@ -37,7 +37,15 @@
 
 
 
+### `方法 utils`
+* request
+* filterQueryData
 
-// 方法 utils
-export { default as request } from './lib/utils/request';
-export {filterQueryData} from './lib/common/queryTool';
+
+
+
+
+# ⚠️注意
+
+1. 项目更新内容参见：[更新记录](update.md)
+2. 有新需求：急+钉钉；不急+issue
