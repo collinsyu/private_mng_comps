@@ -38,7 +38,7 @@
 
 
 ### `方法 utils`
-* request
+* [request](src/utils/request/index.md)
 * filterQueryData
 
 
@@ -47,5 +47,5 @@
 
 # ⚠️注意
 
-1. 项目更新内容参见：[更新记录](update.md)
+1. 项目更新内容参见：[更新记录](UPDATE.md)
 2. 有新需求：急+钉钉；不急+issue
