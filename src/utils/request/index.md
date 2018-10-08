@@ -7,9 +7,9 @@
 ## API
 
 
-`request`
 
-### 例子：
+
+### `request`：
 
 ```
 request(url,options).then(...)
@@ -23,7 +23,7 @@ request(url,options).then(...)
 
 
 
-### `query`例子：
+### `query`：
 
 ```
 
@@ -37,7 +37,7 @@ query(url,params).then(...)
 
 
 
-### `create`例子：
+### `create`：
 
 ```
 <!--  其实就是post 请求，名字先这样定义吧，以后再正 -->
@@ -47,7 +47,7 @@ create(url,params).then(...)；
 
 
 
-### `donew`例子：
+### `donew`：
 
 ```
 懵逼！
@@ -58,7 +58,7 @@ create(url,params).then(...)；
 
 
 
-### `show`例子：
+### `show`：
 
 ```
 懵逼！
@@ -69,7 +69,7 @@ create(url,params).then(...)；
 
 
 
-### `edit`例子：
+### `edit`：
 
 ```
 懵逼！
@@ -80,7 +80,7 @@ create(url,params).then(...)；
 
 
 
-### `remove`例子：
+### `remove`：
 
 ```
 
@@ -92,7 +92,7 @@ remove(url,params).then(...)；
 
 
 
-### `patch`例子：
+### `patch`：
 
 ```
 
@@ -104,7 +104,7 @@ patch(url,params).then(...)
 
 
 
-### `update`例子：
+### `update`：
 
 ```
 update(url,params).then(...)
