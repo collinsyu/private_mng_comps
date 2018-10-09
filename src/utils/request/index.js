@@ -171,7 +171,7 @@ export default function request(url, options) {
     ...options
   };
   //options.credentials = 'include';
-  return fetch(surl, opts).then(checkStatus).then(parseJSON).then(checkData).then((data) => ({data})).catch(parseError);
+  return fetch(surl, opts).then(checkStatus).then(parseJSON).then(checkData).then((data) => (data)).catch(parseError);
 }
 
 /**
