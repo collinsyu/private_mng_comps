@@ -6,6 +6,7 @@ import classNames from 'classnames';
 const { TabPane } = Tabs;
 
 function getBreadcrumb(breadcrumbNameMap, url) {
+  // debugger
   if (breadcrumbNameMap[url]) {
     return breadcrumbNameMap[url];
   }
@@ -89,10 +90,12 @@ export default class PageHeader extends PureComponent {
         />
       );
     } else if (location && location.pathname) {
+      // debugger
       const pathSnippets = location.pathname.split('/').filter(i => i);
       const extraBreadcrumbItems = pathSnippets.map((_, index) => {
         const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
         const currentBreadcrumb = getBreadcrumb(breadcrumbNameMap, url);
+        // debugger
         const isLinkable = (index !== pathSnippets.length - 1) && currentBreadcrumb.component;
         return currentBreadcrumb.name && !currentBreadcrumb.hideInBreadcrumb ? (
           <Breadcrumb.Item key={url}>

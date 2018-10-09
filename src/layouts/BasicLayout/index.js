@@ -12,6 +12,20 @@ import ModifyPassModel from '../ModifyPassModel';
 
 const { Content } = Layout;
 
+
+
+function getFlatMenuData(menus) {
+  let keys = {};
+  menus.forEach((item) => {
+    if (item.children) {
+      keys[item.path] = { ...item };
+      keys = { ...keys, ...getFlatMenuData(item.children) };
+    } else {
+      keys[item.path] = { ...item };
+    }
+  });
+  return keys;
+}
 /**
  * 根据菜单取得重定向地址.
  */
@@ -60,7 +74,7 @@ enquireScreen((b) => {
 class BasicLayout extends React.PureComponent {
   static childContextTypes = {
     location: PropTypes.object,
-    breadcrumbNameMap: PropTypes.array,
+    breadcrumbNameMap: PropTypes.object,
   }
   state = {
     isMobile,
@@ -68,10 +82,24 @@ class BasicLayout extends React.PureComponent {
     collapsed:false,
   };
   getChildContext() {
-    const { location, menuData } = this.props;
+    const { location, route } = this.props;
+    // debugger
+    const menuData = getFlatMenuData(getMenuData());
+    const routerConfig = route.routes;
+    const routerData = {};
+    // debugger
+    routerConfig.map((item)=>{
+      // debugger
+      const path = item.path||"";
+      const menuItem = menuData[path.replace(/^\//, '')] || {};
+      routerData[path] = {
+        ...item,
+        name: item.name || menuItem.name,
+      };
+    })
     return {
       location,
-      breadcrumbNameMap: menuData,
+      breadcrumbNameMap: routerData,
     };
   }
   componentDidMount() {
