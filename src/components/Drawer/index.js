@@ -13,11 +13,6 @@ class Drawer extends PureComponent {
     };
   };
 
-  fuckClick(e) {
-    e.stopPropagation();
-    this.props.onCancel();
-  };
-
   render() {
     return (
       <div className={"_yhq_drawer"}>
