@@ -5,7 +5,7 @@
 
 ### `layouts`
 * [BasicLayout](src/layouts/BasicLayout/index.md)
-* PageHeaderLayout
+* [PageHeaderLayout](src/layouts/PageHeaderLayout/index.md)
 
 ###  `components`
 * SelectX

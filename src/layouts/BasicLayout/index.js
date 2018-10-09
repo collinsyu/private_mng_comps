@@ -4,11 +4,11 @@ import { Layout, Icon, message } from 'antd';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import { enquireScreen } from 'enquire-js';
-import GlobalHeader from '../components/GlobalHeader';
-import GlobalFooter from '../components/GlobalFooter';
-import SiderMenu from '../components/SiderMenu';
-import { getMenuData } from '../common/menu';
-import ModifyPassModel from './ModifyPassModel';
+import GlobalHeader from '../../components/GlobalHeader';
+import GlobalFooter from '../../components/GlobalFooter';
+import SiderMenu from '../../components/SiderMenu';
+import { getMenuData } from '../../custom/menu';
+import ModifyPassModel from '../ModifyPassModel';
 
 const { Content } = Layout;
 
