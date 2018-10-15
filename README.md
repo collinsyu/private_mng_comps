@@ -8,18 +8,18 @@
 * [PageHeaderLayout](src/layouts/PageHeaderLayout/index.md)
 
 ###  `components`
-* [FormItemX](doc/FormItemX/index.md)
-* [SlipOutModal](doc/SlipOutModal/index.md)
-* [DbclickCopySpan](doc/DbclickCopySpan/index.md)
-* [EditSpanCell](doc/EditSpanCell/index.md)
-* [RowCallList](doc/RowCallList/index.md)
-* [TableX](doc/TableX/index.md)
-* [SearchTable](doc/SearchTable/index.md)
-* [QuickTool](doc/QuickTool/index.md)
-* [WrapAuth](doc/WrapAuth/index.md)
-* [AuthA](doc/AuthA/index.md)
-* [EditableCell](doc/EditableCell/index.md)
-* [SearchTree](doc/SearchTree/index.md)
+* [FormItemX](doc/components/FormItemX/index.md)
+* [SlipOutModal](doc/components/SlipOutModal/index.md)
+* [DbclickCopySpan](doc/components/DbclickCopySpan/index.md)
+* [EditSpanCell](doc/components/EditSpanCell/index.md)
+* [RowCallList](doc/components/RowCallList/index.md)
+* [TableX](doc/components/TableX/index.md)
+* [SearchTable](doc/components/SearchTable/index.md)
+* [QuickTool](doc/components/QuickTool/index.md)
+* [WrapAuth](doc/components/WrapAuth/index.md)
+* [AuthA](doc/components/AuthA/index.md)
+* [EditableCell](doc/components/EditableCell/index.md)
+* [SearchTree](doc/components/SearchTree/index.md)
 
 
 ### `官方组件`
