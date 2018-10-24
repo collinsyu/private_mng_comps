@@ -7,11 +7,12 @@ export { default as PageHeaderLayout } from './lib/layouts/PageHeaderLayout';
 
 // components
 export { default as SelectX } from './lib/custom/components/SelectX';
-export { default as SlipOutModal } from './lib/custom/components/SlipOutModal';
 export { default as CheckboxX } from './lib/custom/components/CheckboxX';
+export { default as RangePickerX } from './lib/custom/components/RangePickerX';
+
+export { default as SlipOutModal } from './lib/custom/components/SlipOutModal';
 export { default as DbclickCopySpan } from './lib/custom/components/DbclickCopySpan';
 export { default as EditSpanCell } from './lib/custom/components/EditSpanCell';
-export { default as RangePickerX } from './lib/custom/components/RangePickerX';
 export { default as RowCallList } from './lib/custom/components/RowCallList';
 export { default as FormItemX } from './lib/custom/components/FormItemX';
 export { default as TableX } from './lib/custom/components/TableX';

@@ -24,7 +24,7 @@ class Drawer extends PureComponent {
                 <div className={"_yhq_container"}>
                   <div className={"_yhq_head"}>
                     <span className={"_yhq_title"}>{this.state.title}</span>
-                    <Icon onClick={this.props.onCancel} className={"_yhq_close"} type="cross"/>
+                    <Icon onClick={this.props.onCancel} className={"_yhq_close"} type="close"/>
 
                   </div>
                   <div className={"_yhq_body"} style={{maxHeight: document.body.clientHeight-(this.props.footString?80:40)}}>
