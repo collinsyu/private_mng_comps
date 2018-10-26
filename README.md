@@ -9,6 +9,7 @@
 
 ###  `components`
 * [FormItemX](doc/components/FormItemX/index.md)
+* [FormItemXGen](doc/components/FormItemXGen/index.md)
 * [SlipOutModal](doc/components/SlipOutModal/index.md)
 * [DbclickCopySpan](doc/components/DbclickCopySpan/index.md)
 * [EditSpanCell](doc/components/EditSpanCell/index.md)

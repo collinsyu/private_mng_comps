@@ -37,7 +37,9 @@ class SelectX extends Component {
   render() {
     return (
       <div>
-        <Select onChange={this.handleChange} placeholder="请选择" showSearch optionFilterProp="pinyin" notFoundContent="无法找到" {...this.props}>
+        <Select
+          dropdownMatchSelectWidth={false}
+          style={{width:"100%",minWidth:"120px"}}dropdownMatchSelectWidth onChange={this.handleChange} placeholder="请选择" showSearch optionFilterProp="pinyin" notFoundContent="无法找到" {...this.props}>
           {this.getUserType()}
         </Select>
       </div>

@@ -15,6 +15,7 @@ export { default as DbclickCopySpan } from './lib/custom/components/DbclickCopyS
 export { default as EditSpanCell } from './lib/custom/components/EditSpanCell';
 export { default as RowCallList } from './lib/custom/components/RowCallList';
 export { default as FormItemX } from './lib/custom/components/FormItemX';
+export { default as FormItemXGen } from './lib/custom/components/FormItemXGen';
 export { default as TableX } from './lib/custom/components/TableX';
 export { default as SearchTable } from './lib/custom/components/SearchTable';
 export { default as QuickTool } from './lib/custom/components/QuickTool';
