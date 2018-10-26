@@ -4,7 +4,8 @@ const Option = Select.Option;
 
 class SelectX extends Component {
   getUserType() {
-    if (this.props.data[this.props.typeName]instanceof Array) {
+    const {data = {}} = this.props;
+    if (data[this.props.typeName]instanceof Array) {
       let dataType = [];
       if (this.props.all === 'true' || this.props.all) {
         let name = '所有';
@@ -17,10 +18,10 @@ class SelectX extends Component {
             pinyin: 'all',
             value: 'all'
           },
-          ...this.props.data[this.props.typeName]
+          ...data[this.props.typeName]
         ];
       } else {
-        dataType = this.props.data[this.props.typeName]
+        dataType = data[this.props.typeName]
       }
 
       return dataType.map(type => <Option key={type.value} pinyin={type.pinyin} value={type.value}>{type.name}</Option>);

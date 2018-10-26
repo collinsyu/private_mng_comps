@@ -203,7 +203,7 @@ class FormItemX extends Component {
         return <Upload {...uploadFileprops}><Button type="ghost"><Icon type="upload" />点击上传文件</Button></Upload>;
       case 'treeselect':
         let treeData = [];
-        const {data} = this.props.typeOpts;
+        const {data={}} = this.props.typeOpts;
         if (data[this.props.name] instanceof Array) {
           treeData=data[this.props.name];
         }
