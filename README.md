@@ -23,6 +23,10 @@
 * [SearchTree](doc/components/SearchTree/index.md)
 
 
+###  `plugins` 一些特殊自定义组件
+
+* [FormItemX](doc/plugins/markdownViewer/index.md)
+
 ### `官方组件`
 
 效果参考： https://preview.pro.ant.design/
