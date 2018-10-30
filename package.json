@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm -rf lib && mkdir lib",
     "cpless": "node script.js",
-    "lib": "npm run clean && babel src --out-dir lib"
+    "lib": "npm run clean && babel src --out-dir lib && node script.js"
   },
   "files": [
     "lib"

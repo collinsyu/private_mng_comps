@@ -9,6 +9,7 @@ import {
     Tooltip
 } from 'antd';
 import marked from  './tide-marked';
+import Moment from "moment";
 
 class Viewer extends React.Component {
 
