@@ -27,6 +27,8 @@
     "dva-loading": "^1.0.4",
     "enquire-js": "^0.1.1",
     "fastclick": "^1.0.6",
+    "highlight.js": "^9.13.1",
+    "katex": "^0.10.0",
     "lodash": "^4.17.4",
     "lodash-decorators": "^4.4.1",
     "moment": "^2.19.1",

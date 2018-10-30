@@ -38,3 +38,9 @@ export { default as Drawer } from './lib/components/Drawer';
 // 方法 utils
 export { default as request } from './lib/utils/request';
 export {filterQueryData} from './lib/utils/queryTool';
+
+
+
+// 在开发
+
+export { default as MarkdownViewer } from './lib/custom/plugins/markdownViewer/tide-marked';
