@@ -21,7 +21,7 @@ class Viewer extends React.Component {
     }
     componentDidMount() {}
     render() {
-        const {source="",metaInfo={}} = this.props;
+        const {source="",metaInfo} = this.props;
         var domValue = marked(source);
 
 
