@@ -3,6 +3,6 @@ export const formItemLayout = {
     span: 8
   },
   wrapperCol: {
-    span: 16
+    span: 14
   }
 };

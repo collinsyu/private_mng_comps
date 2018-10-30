@@ -178,10 +178,16 @@ class FormItemX extends Component {
       case 'checkboxx':
         placeholder = `请选择${this.props.label}`;
         typeOpts.typeName = this.props.name;
+        if(this.props.dataName) {
+          typeOpts.typeName = this.props.dataName;
+        }
         return <CheckboxX {...typeOpts} onChange={(value)=>this.props.onChange&&this.props.onChange(this.props.name,value)}/>;
       case 'radiox':
         placeholder = `请选择${this.props.label}`;
         typeOpts.typeName = this.props.name;
+        if(this.props.dataName) {
+          typeOpts.typeName = this.props.dataName;
+        }
         return <RadioX {...typeOpts} onChange={(value)=>this.props.onChange&&this.props.onChange(this.props.name,value.target.value)}/>;
       case 'rangepickerx':
         return this.transformRangePickerX(this.props);
