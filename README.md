@@ -25,7 +25,7 @@
 
 ###  `plugins` 一些特殊自定义组件
 
-* [FormItemX](doc/plugins/markdownViewer/index.md)
+* [MarkdownViewer](doc/plugins/markdownViewer/index.md)
 
 ### `官方组件`
 
