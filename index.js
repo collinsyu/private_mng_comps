@@ -43,4 +43,4 @@ export {filterQueryData} from './lib/utils/queryTool';
 
 // 在开发
 
-export { default as MarkdownViewer } from './lib/custom/plugins/markdownViewer/tide-marked';
+export { default as MarkdownViewer } from './lib/custom/plugins/markdownViewer/viewer';
