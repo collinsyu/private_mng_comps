@@ -1,6 +1,11 @@
 import React, { PureComponent } from 'react';
-import { Input, Icon,Select ,Checkbox} from 'antd';
+import { Input, Icon,Select ,Checkbox,Tag} from 'antd';
+import  Ellipsis from "../../components/Ellipsis";
+import _ from "lodash";
+
 const Option = Select.Option;
+const { TextArea } = Input;
+
 
 class EditableCell extends PureComponent {
   constructor(props) {
@@ -25,6 +30,10 @@ class EditableCell extends PureComponent {
   }
   handleSelectChange = (value) => {
     this.setState({ value:value.key, text:value.label });
+  }
+  handleMultiSelectChange = (value) => {
+
+    this.setState({ value:_.map(value,(e)=>(e.key)), text:_.map(value,(e)=>(e.label)) });
   }
   check = () => {
     this.setState({ editable: false });
@@ -51,7 +60,16 @@ class EditableCell extends PureComponent {
     switch (type) {
       case 'select':
         return (
-          <Select onBlur={this.check} labelInValue defaultValue={{ key: value }} autoFocus onChange={this.handleSelectChange} style={{width: '100%'}}>
+          <Select onBlur={this.check} dropdownMatchSelectWidth={false} labelInValue defaultValue={{ key: value }} autoFocus onChange={this.handleSelectChange} style={{width: '100%'}}>
+            {this.getSelectOption()}
+          </Select>
+        );
+      case 'multiselect':
+        console.log(value);
+        var _formatvalue = _.map(value,(e)=>({key:e}))
+        return (
+          <Select onBlur={this.check} mode="multiple" dropdownMatchSelectWidth={false}
+            labelInValue defaultValue={_formatvalue} autoFocus onChange={this.handleMultiSelectChange} style={{width: '100%',minWidth:"80px"}}>
             {this.getSelectOption()}
           </Select>
         );
@@ -59,18 +77,40 @@ class EditableCell extends PureComponent {
         return (
           <Checkbox onBlur={this.check} labelInValue checked={value} autoFocus onChange={(e)=>{this._handleChange(e.target.checked)}}/>
         );
+      case 'textarea':
+        return (
+          <TextArea onBlur={this.check} autoFocus value={value} onChange={this.handleChange} onPressEnter={this.check} />
+        );
       default:
         return <Input onBlur={this.check} autoFocus value={value} onChange={this.handleChange} onPressEnter={this.check} />
     }
   }
   renderLabel =() => {
-    const { type } = this.props;
+    const { type ,option=[]} = this.props;
     const { value,text, editable } = this.state;
     switch (type) {
       case 'checkbox':
         return value?<Icon type="check-circle-o" style={{color:"green"}}/>:<Icon type="close-circle-o" style={{color:"red"}}/>
+      case 'select':
+
+        var _str = text;
+        if(!_str){
+          var _obj = _.find(option,(e)=>(e.value === value))||{};
+          _str = _obj.label;
+        }
+        return _str
+      case 'multiselect':
+        var _arr = text||[];
+        if(!_arr.length){
+          option.map(function(_q){
+            if(value.indexOf(_q.value) !== -1){
+              _arr.push(_q.label)
+            }
+          })
+        }
+        return _.map(_arr,(e,ii)=>(<Tag key={ii} color="blue">{e}</Tag>))
       default:
-        return text ? text : value || ' '
+        return <Ellipsis length={20} tooltip>{text ? text : value || ' '}</Ellipsis>
     }
   }
   render() {
