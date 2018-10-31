@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Input, Icon,Select } from 'antd';
+import { Input, Icon,Select ,Checkbox} from 'antd';
 const Option = Select.Option;
 
 class EditableCell extends PureComponent {
@@ -18,6 +18,9 @@ class EditableCell extends PureComponent {
 
   handleChange = (e) => {
     const value = e.target.value;
+    this.setState({ value });
+  }
+  _handleChange = (value) => {
     this.setState({ value });
   }
   handleSelectChange = (value) => {
@@ -52,8 +55,22 @@ class EditableCell extends PureComponent {
             {this.getSelectOption()}
           </Select>
         );
+      case 'checkbox':
+        return (
+          <Checkbox onBlur={this.check} labelInValue checked={value} autoFocus onChange={(e)=>{this._handleChange(e.target.checked)}}/>
+        );
       default:
         return <Input onBlur={this.check} autoFocus value={value} onChange={this.handleChange} onPressEnter={this.check} />
+    }
+  }
+  renderLabel =() => {
+    const { type } = this.props;
+    const { value,text, editable } = this.state;
+    switch (type) {
+      case 'checkbox':
+        return value?<Icon type="check-circle-o" style={{color:"green"}}/>:<Icon type="close-circle-o" style={{color:"red"}}/>
+      default:
+        return text ? text : value || ' '
     }
   }
   render() {
@@ -64,20 +81,21 @@ class EditableCell extends PureComponent {
           editable ?
             <div className="editable-cell-input-wrapper">
               {this.getInputItem()}
-              <Icon
+              {/* <Icon
                 type="check"
                 className="editable-cell-icon-check"
                 onClick={this.check}
-              />
+              /> */}
             </div>
             :
             <div className="editable-cell-text-wrapper" onDoubleClick={this.edit}>
-              {text ? text : value || ' '}
-              <Icon
+              {this.renderLabel()}
+              {/* {text ? text : value || ' '} */}
+              {/* <Icon
                 type="edit"
                 className="editable-cell-icon"
                 onClick={this.edit}
-              />
+              /> */}
             </div>
         }
         <style>{`
