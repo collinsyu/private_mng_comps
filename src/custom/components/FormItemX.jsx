@@ -8,6 +8,8 @@ import {formItemLayout} from '../constants'
 import {getAuth} from '../tool';
 import moment from 'moment';
 import UploadImageX from './UploadImageX';
+import UploadX from './UploadX';
+
 import { query } from '../../utils/request';
 
 const { TextArea } = Input;
@@ -207,6 +209,18 @@ class FormItemX extends Component {
           ...this.props.uploadProps
         };
         return <Upload {...uploadFileprops}><Button type="ghost"><Icon type="upload" />点击上传文件</Button></Upload>;
+      case 'uploadx':
+        const uploadxFileprops = {
+          action: window.path+'upload',
+          multiple: false,
+          onChange: this.props.uploadCallbak,
+          data: {type: this.props.uploadType},
+          showUploadList:false,
+          accept:'',
+          ...this.props.uploadProps
+        };
+        return <UploadX {...uploadxFileprops}/>;
+
       case 'treeselect':
         let treeData = [];
         const {data={}} = this.props.typeOpts;
