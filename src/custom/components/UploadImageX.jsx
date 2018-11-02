@@ -62,7 +62,7 @@ export default class PicturesWall extends PureComponent {
         //上传成功 目前这样只能是单个文件，当有多个文件时，需要在此处处理
         let fileTokens= fileList.map((file)=> file.response.fileToken);
         //返回多个文件token
-        if(fileList.length == 0) {
+        if(fileList.length == 1) {
           fileTokens=fileTokens[0]
         }
         onChange.call(this, fileTokens);
