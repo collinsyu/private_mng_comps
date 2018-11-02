@@ -251,9 +251,12 @@ class FormItemX extends Component {
     let initValue = this.props.initValue;
     let formItem = this.props.formItem;
     if (this.props.modalType === 'create') {
-      if (this.props.newData['initData']) {
-        formItem = this.props.newData['initData'];
+      if(this.props.newData){
+        if (this.props.newData['initData']) {
+          formItem = this.props.newData['initData'];
+        }
       }
+
     }
 
     if(initValue === undefined && formItem) {
