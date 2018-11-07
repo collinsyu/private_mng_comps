@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {Form,Input,InputNumber,DatePicker,Upload, Button, Icon,TreeSelect} from 'antd';
+import {Form,Input,InputNumber,DatePicker,Upload, Button, Icon,TreeSelect,Checkbox} from 'antd';
 import SelectX from './SelectX';
 import CheckboxX from './CheckboxX';
+import CheckboxNoLabel from './CheckboxNoLabel';
 import RadioX from './RadioX';
 import RangePickerX from './RangePickerX';
 import {formItemLayout} from '../constants'
@@ -177,6 +178,8 @@ class FormItemX extends Component {
         delete inOpts.typeName;
         placeholder = `请输入${this.props.label}`;
         return <InputNumber {...inOpts} placeholder={placeholder} />;
+      case 'checkboxnolabel':
+        return <CheckboxNoLabel {...typeOpts} onChange={(value)=>this.props.onChange&&this.props.onChange(this.props.name,value)}/>;
       case 'checkboxx':
         placeholder = `请选择${this.props.label}`;
         typeOpts.typeName = this.props.name;
@@ -327,7 +330,7 @@ class FormItemX extends Component {
         isText =  modifyText;
     }
 
-
+    console.log(initValue);
 
     return (display ?
       <FormItem {...defaultOpts} {...this.props}>
@@ -336,7 +339,7 @@ class FormItemX extends Component {
           this.props.children:
           this.props.getFieldDecorator(this.props.name, {
               rules: this.getRules(),
-              initialValue: initValue || undefined
+              initialValue: initValue
           })(this.getFormItem())
         )
 
