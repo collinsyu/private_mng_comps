@@ -42,5 +42,5 @@ export {filterQueryData} from './lib/utils/queryTool';
 
 
 // 在开发
-
-export { default as MarkdownViewer } from './lib/custom/plugins/markdownViewer/viewer';
+// 暂时先不暴露，单独引用
+// export { default as MarkdownViewer } from './lib/custom/plugins/markdownViewer/viewer';
