@@ -330,7 +330,7 @@ class FormItemX extends Component {
         isText =  modifyText;
     }
 
-    console.log(initValue);
+    // console.log(initValue);
 
     return (display ?
       <FormItem {...defaultOpts} {...this.props}>
