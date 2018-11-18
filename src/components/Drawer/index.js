@@ -41,7 +41,9 @@ class Drawer extends PureComponent {
             : null}
         </QueueAnim>
         <style>{`
-
+          ._yhq_drawer{
+            display:inline-block;
+          }
           ._yhq_drawer ._yhq_absolute {
             position: fixed;
             top: 0;
