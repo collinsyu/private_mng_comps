@@ -6,6 +6,8 @@
 ### `layouts`
 * [BasicLayout](src/layouts/BasicLayout/index.md)
 * [PageHeaderLayout](src/layouts/PageHeaderLayout/index.md)
+* [TwoBlocksLayouts](src/layouts/TwoBlocksLayouts/index.md)
+* [WLayout](src/layouts/WLayout/index.md)
 
 ###  `components`
 * [FormItemX](doc/components/FormItemX/index.md)
