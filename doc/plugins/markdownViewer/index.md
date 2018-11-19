@@ -1,5 +1,4 @@
 
-
 ## 何时使用
 
 用于显示markdown文本，格式化解析显示
@@ -10,7 +9,7 @@
 ## 用法示例
 ```
 
-import {MarkdownViewer} from "private_mng_comps";
+import MarkdownViewer from "private_mng_comps/lib/custom/plugins/markdownViewer";
 import "private_mng_comps/lib/custom/plugins/markdownViewer/typo.less"
 
 。。。
