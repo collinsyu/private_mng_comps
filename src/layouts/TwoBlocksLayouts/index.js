@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Layout, Icon, message } from 'antd';
-import { ContainerQuery } from 'react-container-query';
+import { Layout, Icon, message,LocaleProvider } from 'antd';
 import classNames from 'classnames';
-import { enquireScreen } from 'enquire-js';
 import GlobalHeader from '../../components/GlobalHeader';
 import GlobalFooter from '../../components/GlobalFooter';
 import SiderMenu from '../../components/SiderMenu';
 import { getMenuData } from '../../custom/menu';
 import ModifyPassModel from '../ModifyPassModel';
+import zhCN from 'antd/lib/locale-provider/zh_CN';
 
-const { Content } = Layout;
+import HomeHeader from './home/HomeHeader';
 
+const { Header, Content, Footer, Sider } = Layout;
 
 
 function getFlatMenuData(menus) {
@@ -45,31 +45,6 @@ const getRedirect = (item) => {
 };
 getMenuData().forEach(getRedirect);
 
-const query = {
-  'screen-xs': {
-    maxWidth: 575,
-  },
-  'screen-sm': {
-    minWidth: 576,
-    maxWidth: 767,
-  },
-  'screen-md': {
-    minWidth: 768,
-    maxWidth: 991,
-  },
-  'screen-lg': {
-    minWidth: 992,
-    maxWidth: 1199,
-  },
-  'screen-xl': {
-    minWidth: 1200,
-  },
-};
-
-let isMobile;
-enquireScreen((b) => {
-  isMobile = b;
-});
 
 class BasicLayout extends React.PureComponent {
   static childContextTypes = {
@@ -77,7 +52,6 @@ class BasicLayout extends React.PureComponent {
     breadcrumbNameMap: PropTypes.object,
   }
   state = {
-    isMobile,
     visible: false,
     collapsed:false,
   };
@@ -103,14 +77,7 @@ class BasicLayout extends React.PureComponent {
     };
   }
   componentDidMount() {
-    enquireScreen((mobile) => {
-      this.setState({
-        isMobile: mobile,
-      });
-    });
-    /* this.props.dispatch({
-      type: 'user/fetchCurrent',
-    }); */
+
   }
   hideModelHandler = () => {
     this.setState({ visible: false });
@@ -154,48 +121,33 @@ class BasicLayout extends React.PureComponent {
     } = this.props;
     const { collapsed } = this.state;
     const layout = (
+
       <Layout>
-        <SiderMenu
-          logo={logo}
-          menuData={getMenuData()}
-          collapsed={collapsed}
-          location={location}
-          isMobile={this.state.isMobile}
-          onCollapse={this.handleMenuCollapse}
-        />
-        <Layout>
-          <GlobalHeader
-            logo={logo}
-            collapsed={collapsed}
-            currentUser={currentUser}
-            isMobile={this.state.isMobile}
-            onNoticeClear={this.handleNoticeClear}
-            onCollapse={this.handleMenuCollapse}
-            onMenuClick={this.handleMenuClick}
-            // onNoticeVisibleChange={this.handleNoticeVisibleChange}
-          />
-          <Content style={{ margin: '24px 24px 0', height: '100%' }}>
-            <div style={{ minHeight: 'calc(100vh - 260px)' }}>
-              {this.props.children}
-            </div>
-            <GlobalFooter
-              copyright={
-                <div>
-                  {/*Copyright <Icon type="copyright" /> 2018 慧曙通讯科技技术部出品*/}
-                </div>
-              }
-            />
-            <ModifyPassModel hideModelHandler={this.hideModelHandler} visible={this.state.visible}/>
-          </Content>
-        </Layout>
+        <HomeHeader logo={logo} currentUser={currentUser}  handleMenuClick={this.handleMenuClick}/>
+        <Content style={{ padding: '0 50px' }}>
+          <Layout style={{ padding: '24px 0', background: '#fff' }}>
+
+            <Content style={{ padding: '24px 24px', height: '100%' }}>
+              <div style={{ minHeight: 'calc(100vh - 195px)' }}>
+                {this.props.children}
+              </div>
+            </Content>
+          </Layout>
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>
+          <div>
+
+          </div>
+        </Footer>
       </Layout>
+
+
     );
 
     return (
-
-        <ContainerQuery query={query}>
-          {params => <div className={classNames(params)}>{layout}</div>}
-        </ContainerQuery>
+      <LocaleProvider locale={zhCN}>
+        {layout}
+      </LocaleProvider>
 
     );
   }

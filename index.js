@@ -3,6 +3,8 @@
 
 // layouts
 export { default as BasicLayout } from './lib/layouts/BasicLayout';
+export { default as WLayout } from './lib/layouts/WLayout';
+export { default as TwoBlocksLayouts } from './lib/layouts/TwoBlocksLayouts';
 export { default as PageHeaderLayout } from './lib/layouts/PageHeaderLayout';
 
 // components
