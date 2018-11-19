@@ -4,10 +4,10 @@
 ## 目前可用组件有
 
 ### `layouts`
-* [BasicLayout](src/layouts/BasicLayout/index.md)
+* [基本后台布局](src/layouts/BasicLayout/index.md)
 * [PageHeaderLayout](src/layouts/PageHeaderLayout/index.md)
-* [TwoBlocksLayouts](src/layouts/TwoBlocksLayouts/index.md)
-* [WLayout](src/layouts/WLayout/index.md)
+* [两栏布局](src/layouts/TwoBlocksLayouts/index.md)
+* [仿微信后台布局](src/layouts/WLayout/index.md)
 
 ###  `components`
 * [FormItemX](doc/components/FormItemX/index.md)
