@@ -7,8 +7,6 @@ const {SubMenu } = Menu;
 
 
 
-
-
 function _nest(_arr,str){
   _arr = _arr || [];
   return _arr.map(function(item,ii){
@@ -19,7 +17,12 @@ function _nest(_arr,str){
         </SubMenu>
       )
     }else{
-      return <Menu.Item key={str+"-"+ii}><a href={item.url} target="_blank">{item.label}</a></Menu.Item>
+      if(item.url.indexOf("http") !== -1 ||item.url.indexOf("https")!== -1){
+        return <Menu.Item key={str+"-"+ii}><a href={item.url} target="_blank">{item.label}</a></Menu.Item>
+      }else{
+        return <Menu.Item key={str+"-"+ii}><Link to={item.url} >{item.label}</Link></Menu.Item>
+      }
+
     }
   })
 }
