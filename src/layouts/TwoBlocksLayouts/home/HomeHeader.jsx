@@ -52,11 +52,7 @@ class HomeHeader extends React.PureComponent {
 
     return (
       <Header id="_yhq_header1" className="_yhq_header1" theme="dark">
-        <div className={"logo"} key="logo" id="logo">
-          <Link to="/">
-            <h1>{window.SYS_TITLE}</h1>
-          </Link>
-        </div>
+
         <Menu id="nav"
           theme="dark"
           mode="horizontal"
@@ -67,22 +63,26 @@ class HomeHeader extends React.PureComponent {
           {this.renderSubmenu()}
 
 
-          {currentUser.name ? (
-            <Dropdown overlay={menu}>
-              <span className={`${"action"} ${"account"}`}>
-                <Avatar size="small" className={"avatar"} src={currentUser.avatar} />
-                <span className={"name"}>{currentUser.name}</span>
-              </span>
-            </Dropdown>
-          ) : <Spin size="small" style={{ marginLeft: 8 }} />}
+
 
         </Menu>
 
-
+        {currentUser.name ? (
+          <Dropdown overlay={menu}>
+            <span className={`${"action"} ${"account"}`}>
+              <Avatar size="small" className={"avatar"} src={currentUser.avatar} />
+              <span className={"name"}>{currentUser.name}</span>
+            </span>
+          </Dropdown>
+        ) : <Spin size="small" style={{ marginLeft: 8 }} />}
         <style>{`
           ._yhq_header1{
             height: 54px;
             line-height: 54px;
+          }
+          ._yhq_header1 .name{
+            color: rgba(255, 255, 255, 0.65);
+    padding-left: 5px;
           }
           ._yhq_header1 .ant-layout {
             overflow-x: hidden;
@@ -102,7 +102,7 @@ class HomeHeader extends React.PureComponent {
           }
 
           ._yhq_header1 #nav {
-            float: right;
+            float: left;
             font-size: 14px;
             font-family: Lato, "Monospaced Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
           }
@@ -136,7 +136,9 @@ class HomeHeader extends React.PureComponent {
             font-weight: 600;
           }
 
-
+          ._yhq_header1 .account{
+            float:right;
+          }
         `}</style>
       </Header>
     )

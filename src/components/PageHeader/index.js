@@ -170,7 +170,7 @@ export default class PageHeader extends PureComponent {
           ._yhq_pageHeader {
             background: #fff;
             //padding: 8px 22px 0 22px;
-            //border-bottom: 1px solid hsv(0, 0, 91%);
+            border-bottom: 1px solid hsv(0, 0, 91%);
           }
           ._yhq_pageHeader .detail {
             display: flex;
