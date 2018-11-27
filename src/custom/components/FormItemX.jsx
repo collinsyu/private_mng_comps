@@ -10,7 +10,7 @@ import {getAuth} from '../tool';
 import moment from 'moment';
 import UploadImageX from './UploadImageX';
 import UploadX from './UploadX';
-
+import _ from "lodash"
 import { query } from '../../utils/request';
 
 const { TextArea } = Input;
@@ -151,6 +151,12 @@ class FormItemX extends Component {
     if(!typeOpts) {
       typeOpts = {};
     }
+    if(this.props.modalType === 'update') {
+      const { modifyDisabled=false } = this.props;
+      if(modifyDisabled) {
+        typeOpts.disabled=true;
+      }
+    }
 
     let placeholder = `请输入${this.props.label}`;
     if(this.props.placeholder) {
@@ -253,51 +259,75 @@ class FormItemX extends Component {
         let ooOpts = {...typeOpts};
         delete ooOpts.all;
         delete ooOpts.typeName;
-        if(this.props.modalType === 'update') {
-          const { modifyDisabled=false } = this.props;
-          if(modifyDisabled) {
-            ooOpts.disabled=true;
-          }
-        }
+
 
         return <Input {...ooOpts} placeholder={placeholder} onBlur={(value)=>this.props.onBlur&&this.props.onBlur(this.props.name,value.target.value)} onChange={(value)=>this.props.onChange&&this.props.onChange(this.props.name,value.target.value)} onKeyUp={(value)=>this.props.onKeyUp&&this.props.onKeyUp(this.props.name,value.target.value)}/>;
     }
   }
+  renderInitValue = ()=>{
+    var {initValue,formItem ,name,type,start,end} = this.props;
 
-  render() {
-    let initValue = this.props.initValue;
-    let formItem = this.props.formItem;
     if (this.props.modalType === 'create') {
       if(this.props.newData){
         if (this.props.newData['initData']) {
           formItem = this.props.newData['initData'];
         }
       }
-
     }
+
 
     if(initValue === undefined && formItem) {
       //从item中取
-      initValue = formItem[this.props.name];
+      initValue = formItem[name];
     }
     // 时间类型的需要处理
-    if(this.props.type === 'rangepickerx') {
+    if(type === 'rangepickerx') {
       let rangePickerData = [];
       if(formItem) {
-        if (formItem[this.props.start] && formItem[this.props.end]) {
-          rangePickerData.push(moment(formItem[this.props.start], 'YYYY-MM-DD'));
-          rangePickerData.push(moment(formItem[this.props.end], 'YYYY-MM-DD'));
+        if (formItem[start] && formItem[end]) {
+          rangePickerData.push(moment(formItem[start], 'YYYY-MM-DD'));
+          rangePickerData.push(moment(formItem[end], 'YYYY-MM-DD'));
         }
       }
 
       initValue = rangePickerData;
     }
 
-    if(this.props.type === 'datepicker') {
-      if (formItem[this.props.name]) {
-        initValue = moment(formItem[this.props.name], 'YYYY-MM-DD');
+    if(type === 'datepicker') {
+      if (formItem[name]) {
+        try {
+          initValue = moment(formItem[name], 'YYYY-MM-DD');
+        } catch (e) {
+          initValue = formItem[name];
+        }
+
       }
     }
+    return initValue;
+  }
+  renderInitValueToText = (_intValue)=>{
+    var {formItem ,name,type,newData} = this.props;
+    if(type === "selectx"||type === "select"||type === "selectx"){
+      if(!newData){
+        return _intValue
+      }
+      if(!newData[name]){
+        return _intValue
+      }
+      // 获取汉字
+      var _obj = _.find(newData[name],(o)=>(o.value === _intValue));
+      return _obj.name|| _intValue;
+
+    }else{
+      return _intValue
+    }
+
+  }
+  render() {
+
+
+
+
 
 
     let defaultOpts = {}
@@ -315,6 +345,7 @@ class FormItemX extends Component {
         ..._formItemLayout
       }
     }
+
     const { modifyDisplay = true,modifyText=false, modifyDisabled=false } = this.props;
     const authCode = this.props.useName + '.' + this.props.name;
     let display = getAuth(authCode);
@@ -331,26 +362,19 @@ class FormItemX extends Component {
     }
 
     // console.log(initValue);
-
+    const _intValue = this.renderInitValue();
     return (display ?
       <FormItem {...defaultOpts} {...this.props}>
-        {isText?initValue:
+        {isText?this.renderInitValueToText(_intValue):
           (this.props.type==='null'?
           this.props.children:
           this.props.getFieldDecorator(this.props.name, {
               rules: this.getRules(),
-              initialValue: initValue
+              initialValue: _intValue
           })(this.getFormItem())
         )
 
         }
-        {/* {isText?initValue:
-        this.props.getFieldDecorator(this.props.name, {
-            rules: this.getRules(),
-            initialValue: initValue || undefined
-            //validator: this.props.validate?this.props.validate:null,
-        })(this.getFormItem())
-      } */}
 
       </FormItem>
       :<span/>
