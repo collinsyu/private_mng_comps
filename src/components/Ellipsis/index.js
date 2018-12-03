@@ -142,6 +142,7 @@ export default class Ellipsis extends Component {
 
   render() {
     const { text, targetCount } = this.state;
+
     const {
       children,
       lines,
@@ -168,16 +169,16 @@ export default class Ellipsis extends Component {
     const id = `antd-pro-ellipsis-${`${new Date().getTime()}${Math.floor(Math.random() * 100)}`}`;
 
     // support document.body.style.webkitLineClamp
-    if (isSupportLineClamp) {
-      const style = `#${id}{-webkit-line-clamp:${lines};}`;
-      return (
-        <div id={id} className={cls} {...restProps}>
-          <style>{style}</style>
-          {
-            tooltip ? (<Tooltip title={text}>{children}</Tooltip>) : children
-          }
-        </div>);
-    }
+    // if (isSupportLineClamp) {
+    //   const style = `#${id}{-webkit-line-clamp:${lines};}`;
+    //   return (
+    //     <div id={id} className={cls} {...restProps}>
+    //       <style>{style}</style>
+    //       {
+    //         tooltip ? (<Tooltip title={text}>{children}</Tooltip>) : children
+    //       }
+    //     </div>);
+    // }
 
     const childNode = (
       <span ref={this.handleNode}>
@@ -189,7 +190,7 @@ export default class Ellipsis extends Component {
         }
       </span>
     );
-
+console.log("走到了最后");
     return (
       <div
         {...restProps}
