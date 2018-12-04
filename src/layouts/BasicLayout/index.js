@@ -185,7 +185,7 @@ class BasicLayout extends React.PureComponent {
                 </div>
               }
             />
-            <ModifyPassModel hideModelHandler={this.hideModelHandler} visible={this.state.visible}/>
+            <ModifyPassModel hideModelHandler={this.hideModelHandler} visible={this.state.visible} resetPassword={this.props.resetPassword}/>
           </Content>
         </Layout>
       </Layout>

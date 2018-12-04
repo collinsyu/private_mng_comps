@@ -9,6 +9,26 @@
 
 必填参数 `logo`,`currentUser`,`collapsed`,`menuData`,
 
+回掉函数`resetPassword` 示例：
+
+```
+
+resetPassword = (data,hide)=>{
+  alert(JSON.stringify(data)); //这里拿到表单数据
+  hide() //这里是隐藏掉modal的方法，如果页面跳转，可以不需要隐藏，如果是后续都是ajax操作，应该隐藏掉modal
+  ...  //可以继续请求等后续操作
+}
+
+
+....
+<WLayout
+  ...
+  resetPassword={this.resetPassword} //设置回掉方法
+  ...
+/>
+```
+
+
 
 `currentUser` 示例：
 

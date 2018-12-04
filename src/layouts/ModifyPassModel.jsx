@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import {Form, Input, Modal, message} from 'antd';
+import request from '../utils/request';
+import qs from 'qs';
+
 const FormItem = Form.Item;
 
 
@@ -19,24 +22,31 @@ class ModifyPassModel extends Component {
   };
 
   okHandler = () => {
-    //const {dispatch, modalType} = this.props;
+    const {resetPassword} = this.props;
     this.props.form.validateFields((err, values) => {
       if (!err) {
         const reqData = {
           ...values
         };
-
-        // service.password(reqData).then((data) => {
-        //   if (data && !data.data.success) {
-        //     message.error(data.data.resultView);
-        //   } else {
-        //     this.props.hideModelHandler();
-        //     message.info('修改密码成功！');
-        //     window.location.href = window.path + "logout"
-        //   }
-        // })
-
-        //dispatch({type: `accounts/${modalType}`, payload: data});
+        if(resetPassword){
+          return resetPassword(values,this.props.hideModelHandler)
+        }
+        // 没有配置走默认
+        request('password/reset', {
+          method: 'post',
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          body: qs.stringify(values),
+        }).then((data) => {
+          if (data && !data.data.success) {
+            message.error(data.data.resultView);
+          } else {
+            this.props.hideModelHandler();
+            message.info('修改密码成功！');
+            window.location.href = window.path + "logout"
+          }
+        });
 
       }
     });
