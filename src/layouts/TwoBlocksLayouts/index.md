@@ -13,7 +13,7 @@
 
 
 
-回掉函数`resetPassword` 示例：
+回掉函数`resetPassword` 示例：⚠️不设置默认请求`/password/reset`
 
 ```
 
