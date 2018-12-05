@@ -72,11 +72,12 @@ class TableX extends PureComponent {
     this.handleRowSelectChange([], []);
   }
   modifyC = (columns) =>{
+    // console.log(columns);
     var _bbb = _.cloneDeep(columns);
-    console.info(_bbb);;;
+    // console.info(_bbb);;;
     _bbb.map((dou)=>{
       // NOTE: 添加copied属性
-      var _formatDom_fn;
+      var _formatDom_fn = dou.render;
       // NOTE: 添加省略属性
       if(dou.omitLength){
         if(dou.omitText){
