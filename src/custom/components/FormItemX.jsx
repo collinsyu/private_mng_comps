@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Form,Input,InputNumber,DatePicker,Upload, Button, Icon,TreeSelect,Checkbox} from 'antd';
 import SelectX from './SelectX';
+import CascaderX from './CascaderX';
 import CheckboxX from './CheckboxX';
 import CheckboxNoLabel from './CheckboxNoLabel';
 import RadioX from './RadioX';
@@ -104,7 +105,30 @@ class FormItemX extends Component {
       })
     }
   }
+  transformCascaderX = (props) => {
+    let opts = JSON.parse(JSON.stringify(props.typeOpts));
 
+    if(this.props.modalType === 'update') {
+      const { modifyDisabled=false } = this.props;
+      if(modifyDisabled) {
+        // debugger
+        opts.disabled=true;
+      }
+    }
+
+    if(!props.typeOpts['typeName']) {
+      opts.typeName = this.props.name;
+    }
+    if(props.dataName) {
+      opts.typeName = props.dataName;
+    }
+    if(props.mode) {
+      opts.mode = props.mode;
+    }
+    // debugger;
+    const placeholder = `请选择${props.label}`;
+    return <CascaderX {...opts} placeholder={placeholder} onSelect={(value)=>props.onChange&&props.onChange(props.name,value)} onBlur={(value)=>props.onBlur&&props.onBlur(props.name,value)} />;
+  };
   transformSelectX = (props) => {
   //debugger
     // const obj2 = {...obj1}; 属于对象浅拷贝
@@ -178,6 +202,8 @@ class FormItemX extends Component {
 
       case 'selectx':
         return this.transformSelectX(this.props);
+      case 'cascaderx':
+        return this.transformCascaderX(this.props);
       case 'number':
         let inOpts = {...typeOpts};
         delete inOpts.all;
