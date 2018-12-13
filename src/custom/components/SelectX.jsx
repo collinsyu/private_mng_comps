@@ -40,7 +40,7 @@ class SelectX extends Component {
       <div>
         <Select
           dropdownMatchSelectWidth={false}
-          style={{width:"100%",minWidth:"120px"}}dropdownMatchSelectWidth onChange={this.handleChange} placeholder="请选择" showSearch optionFilterProp="pinyin" notFoundContent="无法找到" {...this.props}>
+          style={{width:"100%",minWidth:"120px"}} onChange={this.handleChange} placeholder="请选择" showSearch optionFilterProp="pinyin" notFoundContent="无法找到" {...this.props}>
           {this.getUserType()}
         </Select>
       </div>

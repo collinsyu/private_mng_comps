@@ -70,6 +70,7 @@ class FormItemX extends Component {
     if(this.props.exists) {
       rules.push({
         validator: this.handleFieldExists,
+        trigger: 'blur',
         message: '呃，你输入的内容已存在，请重新输入！'
       });
     }
@@ -93,15 +94,16 @@ class FormItemX extends Component {
         value: value
       };
       query(`${this.props.pathname}/exists`,reqData).then((data) => {
-        if (data && !data.data.success) {
-          callback(data.data.resultView);
-        } else {
-          if(data.data.exist) {
-            callback("1");
-          } else {
-            callback();
-          }
+        if(!data || !data.success){
+          return callback("查询接口报错")
         }
+        if(!data.success){
+          return callback("查询接口报错")
+        }
+        if(data.exist){
+          return callback(data.resultView||"已存在");
+        }
+        callback();
       })
     }
   }
@@ -127,7 +129,7 @@ class FormItemX extends Component {
     }
     // debugger;
     const placeholder = `请选择${props.label}`;
-    return <CascaderX {...opts} placeholder={placeholder} onSelect={(value)=>props.onChange&&props.onChange(props.name,value)} onBlur={(value)=>props.onBlur&&props.onBlur(props.name,value)} />;
+    return <CascaderX {...opts} placeholder={placeholder} onChange={(value)=>props.onChange&&props.onChange(props.name,value)} onBlur={(value)=>props.onBlur&&props.onBlur(props.name,value)} />;
   };
   transformSelectX = (props) => {
   //debugger
@@ -397,6 +399,7 @@ class FormItemX extends Component {
           this.props.children:
           this.props.getFieldDecorator(this.props.name, {
               rules: this.getRules(),
+              validateTrigger:this.props.validateTrigger,
               initialValue: _intValue
           })(this.getFormItem())
         )
