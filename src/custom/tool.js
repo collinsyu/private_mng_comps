@@ -7,9 +7,13 @@
 function isDev() {
   return /localhost/gi.test(location.host) || /10\.(\d+)\.(\d+)\.(\d+)/gi.test(location.host) || /127\.0\.0\.1\./gi.test(location.host)
 }
+
+if(isDev()&&!window.isDev){
+  console.warn("开发环境过滤权限，请设置全局变量window.isDev = true; 生产环境务必设置 window.isDev = false ！！不可编辑")
+}
+
 export function getAuth(authCode) {
   if(isDev()){
-    console.warn("开发环境过滤权限，请设置全局变量window.isDev = true; 生产环境务必设置 window.isDev = false ！！不可编辑")
     if(window.isDev){
       return true;
     }
