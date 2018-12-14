@@ -30,8 +30,9 @@ export function getAuth(authCode) {
   //   //codes.push('Placard.edit');
   //   return !codes.contains(authCode);
   // }
-  let codes = window.authlist||[];
-  return !codes.contains(authCode);
+  let codes = window.authlist||["admin","user"];
+  var _b = codes.contains(authCode)
+  return _b;
 }
 
 Array.prototype.contains = function(val)
