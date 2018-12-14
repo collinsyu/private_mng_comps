@@ -3,7 +3,17 @@
  * @param  {[type]} authCode [description]
  * @return {[type]}          [description]
  */
+
+function isDev() {
+  return /localhost/gi.test(location.host) || /10\.(\d+)\.(\d+)\.(\d+)/gi.test(location.host) || /127\.0\.0\.1\./gi.test(location.host)
+}
 export function getAuth(authCode) {
+  if(isDev()){
+    console.warn("开发环境过滤权限，请设置全局变量window.isDev = true; 生产环境务必设置 window.isDev = false ！！不可编辑")
+    if(window.isDev){
+      return true;
+    }
+  }
   // if (window.user.userType === '3'||window.user.userType === '4') {
   //   return true;
   // } else {
@@ -37,28 +47,14 @@ Array.prototype.contains = function(val)
 };
 
 export function getAuthColumn(columns, authCode) {
-  let keys = [];
-  if (authCode === 'SettlogList' || authCode === 'ReportList' || authCode === 'OrderList') {
-    keys.push('cpNo');
-    keys.push('operation');
-  }
-  if(authCode === 'TradeorderList') {
-    keys.push('merchId');
-  }
-  if(authCode === 'ProductflowList') {
-    keys.push('merchId');
-  }
-  if(authCode === 'AppinfoList') {
-    keys.push('merchId');
-  }
-  if(authCode === 'OrderreportList') {
-    keys.push('merchId');
-  }
-  if(authCode === 'ActivityList') {
-    keys.push('merchId');
-  }
+
+  // 先看是否有全部权限，否则细化权限！
   const isAuth = getAuth(authCode);
   if (!isAuth) {
+    // 没有全部浏览权限，进行筛选！
+    let keys = [];
+    let cloumnsAuth = window.cloumnsAuth||{};
+    keys = cloumnsAuth[authCode]||[];
     return delColumn(columns, keys);
   } else {
     return columns;
