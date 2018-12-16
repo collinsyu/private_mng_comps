@@ -5,7 +5,7 @@
  */
 
 function isDev() {
-  return /localhost/gi.test(location.host) || /10\.(\d+)\.(\d+)\.(\d+)/gi.test(location.host) || /127\.0\.0\.1\./gi.test(location.host)
+  return /localhost/gi.test(location.host) || /10\.(\d+)\.(\d+)\.(\d+)/gi.test(location.host) || /127\.0\.0\.1/gi.test(location.host)
 }
 
 if(isDev()&&!window.isDev){
