@@ -32,6 +32,7 @@ export { default as SearchTree } from './lib/custom/components/SearchTree';
 export { default as DescriptionList } from './lib/components/DescriptionList';
 export { default as Ellipsis } from './lib/components/Ellipsis';
 export { default as Drawer } from './lib/components/Drawer';
+export { default as PopconfirmButton } from './lib/components/PopconfirmButton';
 
 
 
