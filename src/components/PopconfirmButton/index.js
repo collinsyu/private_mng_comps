@@ -20,7 +20,7 @@ export default class PopconfirmButton extends Component {
     const {children,label} = this.props;
     return (
       <Popconfirm title="确认删除此项？" onConfirm={this.confirm} onCancel={this.cancel} okText="确定" cancelText="取消" {...this.props}>
-        {children?children:<Button>{label?lable:"请添加label或者children"}<Button/>}
+        {children?children:<Button>{label?lable:"请添加label或者children"}</Button>}
       </Popconfirm>
 
     );
