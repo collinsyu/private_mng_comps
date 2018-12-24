@@ -39,8 +39,8 @@ class ModifyPassModel extends Component {
           },
           body: qs.stringify(values),
         }).then((data) => {
-          if (data && !data.data.success) {
-            message.error(data.data.resultView);
+          if (data && !data.success) {
+            message.error(data.resultView);
           } else {
             this.props.hideModelHandler();
             message.info('修改密码成功！');
