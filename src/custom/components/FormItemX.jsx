@@ -93,7 +93,11 @@ class FormItemX extends Component {
         fieldName: this.props.name,
         value: value
       };
-      query(`${this.props.pathname}/exists`,reqData).then((data) => {
+      var pathname = this.props.pathname;
+      if(pathname.substr(0, 1) !== "/"){
+        pathname = "/" + pathname;
+      }
+      query(`${pathname}/exists`,reqData).then((data) => {
         if(!data || !data.success){
           return callback("查询接口报错")
         }
