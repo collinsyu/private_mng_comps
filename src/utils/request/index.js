@@ -162,7 +162,7 @@ function checkData(data) {
  */
 export default function request(url, options) {
   //const murl = "api/"
-  var surl = _path2.default.join(window.path, url);
+  const surl = window.path + url;
   let opts = {
     credentials: 'include',
     headers: {
