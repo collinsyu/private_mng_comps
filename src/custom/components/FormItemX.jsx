@@ -94,9 +94,9 @@ class FormItemX extends Component {
         value: value
       };
       var pathname = this.props.pathname;
-      // if(pathname.substr(0, 1) !== "/"){
-      //   pathname = "/" + pathname;
-      // }
+      if(pathname.substr(0, 1) === "/"){
+        pathname = pathname.replace(/^\/*/ig,"");
+      }
       query(`${pathname}/exists`,reqData).then((data) => {
         if(!data || !data.success){
           return callback("查询接口报错")

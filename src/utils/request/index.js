@@ -1,7 +1,6 @@
 import fetch from 'dva/fetch';
 import {message, Modal} from 'antd';
 import qs from 'qs';
-import path from "path";
 
 var isErrorModal = false;
 /**
@@ -163,8 +162,7 @@ function checkData(data) {
  */
 export default function request(url, options) {
   //const murl = "api/"
-  const surl = path.join(window.path ,url);
-
+  var surl = _path2.default.join(window.path, url);
   let opts = {
     credentials: 'include',
     headers: {
