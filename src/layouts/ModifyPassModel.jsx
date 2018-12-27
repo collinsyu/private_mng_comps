@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Form, Input, Modal, message} from 'antd';
+import {Form, Input, Modal, message,Alert} from 'antd';
 import request from '../utils/request';
 import qs from 'qs';
 
@@ -76,13 +76,14 @@ class ModifyPassModel extends Component {
   }
 
   render() {
+    const {children,isNeedResetPassword} = this.props;
     const modalOpts = {
       title: '修改密码',
       visible: this.props.visible,
       onOk: this.okHandler,
+      maskClosable:!isNeedResetPassword,
       onCancel: this.props.hideModelHandler
     };
-    const {children} = this.props;
     const {getFieldDecorator} = this.props.form;
     let formItem = this.props.formItem;
     if (this.props.modalType === 'create') {
@@ -116,6 +117,7 @@ class ModifyPassModel extends Component {
         </span>
 
         <Modal {...modalOpts}>
+          {isNeedResetPassword?<Alert message="首次登陆请修改密码" type="warning" showIcon />:null}
           <Form layout="horizontal">
 
             <FormItem {...formItemLayout} label="旧密码" hasFeedback>

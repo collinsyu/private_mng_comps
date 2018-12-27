@@ -77,9 +77,17 @@ class BasicLayout extends React.PureComponent {
     };
   }
   componentDidMount() {
+    const {isNeedResetPassword} = this.props;
 
+    if(isNeedResetPassword){
+      this.handleMenuClick({key:"modifyPws"})
+    }
   }
   hideModelHandler = () => {
+    const {isNeedResetPassword} = this.props;
+    if(isNeedResetPassword){
+      return message.warn("首次登陆请修改密码")
+    }
     this.setState({ visible: false });
   };
 
@@ -108,16 +116,9 @@ class BasicLayout extends React.PureComponent {
         this.setState({ visible: true });
     }
   }
-  // handleNoticeVisibleChange = (visible) => {
-  //   // if (visible) {
-  //   //   this.props.dispatch({
-  //   //     type: 'global/fetchNotices',
-  //   //   });
-  //   // }
-  // }
   render() {
     const {
-      currentUser, match, location,logo
+      currentUser, match, location,logo,isNeedResetPassword
     } = this.props;
     const { collapsed } = this.state;
     const layout = (
@@ -139,7 +140,7 @@ class BasicLayout extends React.PureComponent {
 
           </div>
         </Footer>
-        <ModifyPassModel hideModelHandler={this.hideModelHandler} visible={this.state.visible} resetPassword={this.props.resetPassword}/>
+        <ModifyPassModel isNeedResetPassword={isNeedResetPassword} hideModelHandler={this.hideModelHandler} visible={this.state.visible} resetPassword={this.props.resetPassword}/>
 
       </Layout>
 
