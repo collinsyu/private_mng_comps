@@ -63,3 +63,5 @@ currentUser={{
   menuData={window.menus}
 />
 ```
+
+新增一个参数`isNeedResetPassword`，强制显示修改密码不可关闭          --2018-12-27
