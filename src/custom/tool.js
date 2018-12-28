@@ -54,16 +54,16 @@ Array.prototype.contains = function(val)
 export function getAuthColumn(columns, authCode) {
 
   // 先看是否有全部权限，否则细化权限！
-  const isAuth = getAuth(authCode);
-  if (!isAuth) {
+  // const isAuth = getAuth(authCode);
+  // if (!isAuth) {
     // 没有全部浏览权限，进行筛选！
     let keys = [];
     let cloumnsAuth = window.cloumnsAuth||{};
     keys = cloumnsAuth[authCode]||[];
     return delColumn(columns, keys);
-  } else {
-    return columns;
-  }
+  // } else {
+  //   return columns;
+  // }
 }
 
 export function delColumn(columns, keys) {
