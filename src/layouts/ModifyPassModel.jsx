@@ -6,6 +6,65 @@ import qs from 'qs';
 const FormItem = Form.Item;
 
 
+var testP = {
+  regex: {
+    illegal: /[^-+=|,0-9a-zA-Z!@#$%^&*?_.~+\/\\(){}\[\]<>]/,
+    allNumber: /^\d+$/,
+    allLetter: /^[a-zA-Z]+$/,
+    allCharacter: /^[-+=|,!@#$%^&*?_.~+\/\\(){}\[\]<>]+$/,
+    allSame: /^([\s\S])\1*$/,
+    upperLetter: /[A-Z]/,
+    lowerLetter: /[a-z]/,
+    number: /\d/g,
+    character: /[-+=|,!@#$%^&*?_.~+\/\\()|{}\[\]<>]/
+  },
+  score: function(e) {
+    var t = 0;
+    if (this.isIllegal(e)) return t;
+    var n = this.size(e);
+    n <= 4 ? t += 5 : n > 4 && n < 8 ? t += 10 : n >= 8 && (t += 25);
+    var r = this.hasLowerAndUpperLetter(e),
+      o = this.hasLetter(e);
+    r ? t += 20 : o && (t += 10);
+    var i = this.hasNumber(e);
+    i >= 3 ? t += 20 : i && (t += 10);
+    var s = this.hasCharacter(e);
+    return s >= 3 ? t += 25 : s && (t += 10), r && i && s ? t += 10 : o && i && s ? t += 5 : (o && i || o && s || i && s) && (t += 2), t
+  },
+  level: function(e) {
+    return Math.floor(this.score(e) / 10)
+  },
+  size: function(e) {
+    return e.length
+  },
+  isIllegal: function(e) {
+    return !!e.match(this.regex.illegal)
+  },
+  isAllNumber: function(e) {
+    return !!e.match(this.regex.allNumber)
+  },
+  isAllLetter: function(e) {
+    return !!e.match(this.regex.allLetter)
+  },
+  isAllSame: function(e) {
+    return !!e.match(this.regex.allSame)
+  },
+  hasNumber: function(e) {
+    return (e.match(this.regex.number) || []).length
+  },
+  hasLetter: function(e) {
+    return !!e.match(this.regex.lowerLetter) || !!e.match(this.regex.upperLetter)
+  },
+  hasLowerAndUpperLetter: function(e) {
+    return !!e.match(this.regex.lowerLetter) && !!e.match(this.regex.upperLetter)
+  },
+  hasNumberAndLetter: function(e) {
+    return !(!e.match(this.regex.number) || !e.match(this.regex.lowerLetter) && !e.match(this.regexp.upperLetter))
+  },
+  hasCharacter: function(e) {
+    return (e.match(this.regex.character) || []).length
+  }
+}
 class ModifyPassModel extends Component {
   constructor(props) {
     super(props);
@@ -61,6 +120,16 @@ class ModifyPassModel extends Component {
     }
   }
   checkConfirm = (rule, value, callback) => {
+    if(value.length < 6){
+      return callback("密码太短了")
+    }
+    if(testP.isIllegal(value)){
+      return callback("密码不能含有特殊符号")
+    }
+    if(!(!!(testP.hasNumber(value) && testP.hasLetter(value) || testP.hasNumber(value) && testP.hasCharacter(value) || testP.hasLetter(value) && testP.hasCharacter(value)))){
+      return callback("密码设置不符合要求，应包含数字大小写字母")
+    }
+
     const form = this.props.form;
     if (value && this.state.confirmDirty) {
       form.validateFields(['confirm'], {force: true});
@@ -138,7 +207,8 @@ class ModifyPassModel extends Component {
                     required: true,
                     message: '请输入登录密码'
                   }, {
-                    validator: this.checkConfirm
+                    validator: this.checkConfirm,
+                    trigger: "onBlur"
                   }
                 ]
               })(<Input type="password"/>)}
