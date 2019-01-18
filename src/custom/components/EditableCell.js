@@ -140,10 +140,10 @@ class EditableCell extends PureComponent {
             </div>
         }
         <style>{`
-            .editable-cell .editable-cell-text-wrapper .anticon {
+            .editable-cell .editable-cell-text-wrapper .anticon.anticon-edit {
               display:none;
             }
-            .editable-cell .editable-cell-text-wrapper:hover .anticon {
+            .editable-cell .editable-cell-text-wrapper:hover .anticon.anticon-edit {
               display:inline;
             }
             .editable-cell .editable-cell-text-wrapper:hover {
