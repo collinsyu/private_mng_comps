@@ -130,6 +130,7 @@ class EditableCell extends PureComponent {
             :
             <div className="editable-cell-text-wrapper" onDoubleClick={this.edit}>
               {this.renderLabel()}
+              <Icon type="edit" style={{color:"#1890ff"}}/>
               {/* {text ? text : value || ' '} */}
               {/* <Icon
                 type="edit"
@@ -139,7 +140,15 @@ class EditableCell extends PureComponent {
             </div>
         }
         <style>{`
-
+            .editable-cell .editable-cell-text-wrapper .anticon {
+              display:none;
+            }
+            .editable-cell .editable-cell-text-wrapper:hover .anticon {
+              display:inline;
+            }
+            .editable-cell .editable-cell-text-wrapper:hover {
+              cursor:pointer;
+            }
             .editable-cell {
               position: relative;
             }
