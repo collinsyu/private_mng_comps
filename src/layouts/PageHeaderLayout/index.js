@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'dva/router';
 import PageHeader from '../../components/PageHeader';
+import PageHeaderLayout from '../../components/PageHeaderLayout';
 
 export default ({ children, wrapperClassName, top, ...restProps }) => (
   <div className={wrapperClassName}>
     {top}
     <PageHeader key="pageheader" {...restProps} linkElement={Link} />
+    <PageHeaderLayout/>
     {children ? <div className="_yhq_content">{children}</div> : null}
 
     <style>{`
