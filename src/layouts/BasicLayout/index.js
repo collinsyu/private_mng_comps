@@ -178,17 +178,11 @@ class BasicLayout extends React.PureComponent {
             onMenuClick={this.handleMenuClick}
             // onNoticeVisibleChange={this.handleNoticeVisibleChange}
           />
-          <Content style={{ margin: '24px 24px 0', height: '100%' }}>
+          <Content style={{ height: '100%' }}>
             <div style={{ minHeight: 'calc(100vh - 260px)' }}>
               {this.props.children}
             </div>
-            <GlobalFooter
-              copyright={
-                <div>
-                  {/*Copyright <Icon type="copyright" /> 2018 慧曙通讯科技技术部出品*/}
-                </div>
-              }
-            />
+            <GlobalFooter copyright={this.props.footer} />
             <ModifyPassModel isNeedResetPassword={isNeedResetPassword} hideModelHandler={this.hideModelHandler} visible={this.state.visible} resetPassword={this.props.resetPassword}/>
           </Content>
         </Layout>

@@ -10,12 +10,12 @@ export default ({ children, wrapperClassName, top, ...restProps }) => (
 
     <style>{`
       ._yhq_content {
-        //margin: 24px 24px 0;
+        margin: 24px 24px 0;
       }
 
       @media screen and (max-width: 576px) {
         ._yhq_content {
-          //margin: 24px 0 0;
+          margin: 24px 0 0;
         }
       }
 
