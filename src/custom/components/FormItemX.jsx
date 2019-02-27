@@ -269,14 +269,13 @@ class FormItemX extends Component {
           treeData=data[this.props.name];
         }
         const treeProps = {
-          ...this.props.typeOpts,
           dropdownStyle:{ maxHeight: 400, overflow: 'auto' },
           treeData,
           allowClear:true,
           placeholder,
           ...this.props.treeProps
         };
-        return <TreeSelect style={{minHeight:120}} showSearch treeNodeFilterProp="pinyin"  {...treeProps} onChange={(value)=>this.props.onChange&&this.props.onChange(this.props.name,value)} />;
+        return <TreeSelect showSearch treeNodeFilterProp="pinyin"  {...treeProps} onChange={(value)=>this.props.onChange&&this.props.onChange(this.props.name,value)} />;
 
 
       case 'uploadimagex':
