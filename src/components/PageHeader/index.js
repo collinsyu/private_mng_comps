@@ -169,7 +169,7 @@ export default class PageHeader extends PureComponent {
         <style>{`
           ._yhq_pageHeader {
             background: #fff;
-            //padding: 8px 22px 0 22px;
+            padding: 8px 22px 0 22px;
             border-bottom: 1px solid hsv(0, 0, 91%);
           }
           ._yhq_pageHeader .detail {
@@ -181,7 +181,7 @@ export default class PageHeader extends PureComponent {
           ._yhq_pageHeader .breadcrumb {
             //margin-bottom: 8px;
             line-height: 36px;
-            padding: 0 24px;
+            //padding: 0 24px;
           }
           ._yhq_pageHeader .tabs {
             margin: 0 0 -17px -8px;
