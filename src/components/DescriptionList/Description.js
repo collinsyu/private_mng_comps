@@ -19,11 +19,12 @@ const Description = ({ term, column, className, children, ...restProps }) => {
     initValue = formItem[restProps.value];
   }
 
-  let newProps = restProps;
+  let newProps = JSON.parse(JSON.stringify(restProps));
   delete newProps.formItem;
   delete newProps.typeOpts;
+  delete newProps.initValue;
   return (
-    <Col className={clsString} {...responsive[column]} {...restProps}>
+    <Col className={clsString} {...responsive[column]} {...newProps}>
       {term && <div className={"_yhq_draw_term"}>{term}</div>}
       {children ? <div className={"_yhq_draw_detail"}>{children}</div>:<div className={"_yhq_draw_detail"}>{initValue}</div>}
     </Col>
