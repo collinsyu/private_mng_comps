@@ -187,6 +187,7 @@ export async function reqwithWholeUrl(url, options) {
       return this.slice(0, prefix.length) === prefix;
     };
   }
+  url = url.toString();
   console.log(typeof(url));
   console.log("".startsWith);
   console.log(url.prototype);
