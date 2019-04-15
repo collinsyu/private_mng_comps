@@ -9,12 +9,12 @@
 
 ```
 
-import {AutoFormItem} from "private_mng_comps";
+import {FormItemXGen} from "private_mng_comps";
 
 ...
 
 <Form>
-  <AutoFormItem
+  <FormItemXGen
   form={this.props.form}
   newData=[]
   formConfigs={[
