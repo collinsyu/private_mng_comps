@@ -2,6 +2,13 @@ import fetch from 'dva/fetch';
 import {message, Modal} from 'antd';
 import qs from 'qs';
 
+
+if (typeof String.prototype.startsWith != 'function') {
+  String.prototype.startsWith = function (prefix){
+    return this.slice(0, prefix.length) === prefix;
+  };
+}
+
 var isErrorModal = false;
 /**
  * 对请求的数据转换成JSON数据格式
