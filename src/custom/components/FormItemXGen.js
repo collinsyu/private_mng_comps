@@ -49,7 +49,7 @@ class FormItemXGen extends PureComponent {
           newitemOpts = Object.assign(newitemOpts,item.opts||{});
           newitemOpts.typeOpts.data = {};
           newitemOpts.typeOpts.data[item.name] = item.values;
-          return  <FormItemX key={ii} {...defaultOpts} {...newitemOpts} label={item.label} name={item.name} type={item.type} />
+          return  <FormItemX key={ii} {...defaultOpts} {...item} {...newitemOpts} label={item.label} name={item.name} type={item.type} />
         })}
       </React.Fragment>
     );
