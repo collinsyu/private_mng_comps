@@ -41,7 +41,7 @@ export { default as Popinfo } from './lib/components/Popinfo';
 
 // 方法 utils
 export { default as request } from './lib/utils/request';
-export { req as req } from './lib/utils/request';
+export { reqwithWholeUrl as reqwithWholeUrl } from './lib/utils/request';
 export {filterQueryData} from './lib/utils/queryTool';
 
 

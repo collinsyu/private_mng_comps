@@ -175,7 +175,7 @@ export default function request(url, options) {
 }
 
 
-export async function req(url, options) {
+export async function reqwithWholeUrl(url, options) {
   //const murl = "api/"
   // const surl = window.path + url;
   console.log("url",url);
