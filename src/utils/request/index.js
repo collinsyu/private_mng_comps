@@ -178,6 +178,7 @@ export default function request(url, options) {
 export async function req(url, options) {
   //const murl = "api/"
   // const surl = window.path + url;
+  console.log("url",url);
   var surl = url.startWith('/mock')?url:window.path + url;
   if(url.startWith("http")){
     surl = url;
