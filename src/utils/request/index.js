@@ -174,6 +174,27 @@ export default function request(url, options) {
   return fetch(surl, opts).then(checkStatus).then(parseJSON).then(checkData).then((data) => (data)).catch(parseError);
 }
 
+
+export function req(url, options) {
+  //const murl = "api/"
+  // const surl = window.path + url;
+  var surl = url.startWith('/mock')?url:window.path + url;
+  if(url.startWith("http")){
+    surl = url;
+  }
+
+  let opts = {
+    credentials: 'include',
+    headers: {
+      'x-requested-with': true
+    },
+    ...options
+  };
+  //options.credentials = 'include';
+  return fetch(surl, opts).then(checkStatus).then(parseJSON).then(checkData).then((data) => (data)).catch(parseError);
+}
+
+
 /**
  * 分页查询方式
  */
