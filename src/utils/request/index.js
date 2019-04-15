@@ -4,6 +4,7 @@ import qs from 'qs';
 
 
 if (typeof String.prototype.startsWith != 'function') {
+  console.log("执行了新增的方法");
   String.prototype.startsWith = function (prefix){
     return this.slice(0, prefix.length) === prefix;
   };
@@ -185,7 +186,10 @@ export default function request(url, options) {
 export async function reqwithWholeUrl(url, options) {
   //const murl = "api/"
   // const surl = window.path + url;
+  console.log(typeof(url));
+  console.log("".startsWith);
   console.log("url",url);
+
   var surl = url.startWith('/mock')?url:window.path + url;
   if(url.startWith("http")){
     surl = url;
