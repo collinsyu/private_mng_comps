@@ -347,7 +347,7 @@ class FormItemX extends Component {
         return _intValue
       }
       // 获取汉字
-      var _obj = _.find(newData[name],(o)=>(o.value === _intValue));
+      var _obj = _.find(newData[name],(o)=>(o.value === _intValue))||{};
       return _obj.name|| _intValue;
 
     }else{
