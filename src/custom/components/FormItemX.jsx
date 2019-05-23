@@ -380,7 +380,7 @@ class FormItemX extends Component {
 
     const { modifyDisplay = true,modifyText=false, modifyDisabled=false } = this.props;
     const authCode = this.props.useName + '.' + this.props.name;
-    let display = modifyDisplay;
+    let display = true;
     // let display = getAuth(authCode);
     // if(display) {
       if(this.props.modalType === 'update') {
