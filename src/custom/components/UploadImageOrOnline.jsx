@@ -130,7 +130,7 @@ export default class UploadImageOrOnline extends PureComponent {
       </div>
     );
     // 默认为一张图片
-    const { fileLength=3 } = this.props;
+    const { fileLength=1 } = this.props;
 
     var realupload = <Upload
       action={window.path+'upload'}
