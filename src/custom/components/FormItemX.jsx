@@ -10,6 +10,7 @@ import {formItemLayout} from '../constants'
 import {getAuth} from '../tool';
 import moment from 'moment';
 import UploadImageX from './UploadImageX';
+import UploadImageOrOnline from './UploadImageOrOnline';
 import UploadX from './UploadX';
 import _ from "lodash"
 import { query } from '../../utils/request';
@@ -283,6 +284,12 @@ class FormItemX extends Component {
         delete uiOpts.all;
         delete uiOpts.typeName;
         return <UploadImageX {...uiOpts}/>;
+
+      case 'uploadimageonmodal':
+        let uimOpts = {...typeOpts};
+        delete uimOpts.all;
+        delete uimOpts.typeName;
+        return <UploadImageOrOnline {...uimOpts}/>;
 
       case 'null':
         return [];

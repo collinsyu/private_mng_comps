@@ -52,7 +52,6 @@ export default class PicturesWall extends PureComponent {
   // 上传多张图片时，应该返回一个列表或者,分
   handleChange = (info) => {
     let fileList = info.fileList;
-
     this.setState({ fileList })
     const { onChange } = this.props;
     if (onChange) {
@@ -85,6 +84,7 @@ export default class PicturesWall extends PureComponent {
         <Upload
           action={window.path+'upload'}
           listType="picture-card"
+          disabled={true}
           fileList={fileList}
           onPreview={this.handlePreview}
           onChange={this.handleChange}
@@ -92,6 +92,7 @@ export default class PicturesWall extends PureComponent {
         >
           {fileList.length >= fileLength ? null : uploadButton}
         </Upload>
+
         <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
           <img alt="example" style={{ width: '100%' }} src={previewImage} />
         </Modal>
