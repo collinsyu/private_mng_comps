@@ -3,16 +3,12 @@ import { Upload, Icon, message,Modal,Input,Tabs,Button} from 'antd';
 import { create } from '../../utils/request';
 
 const { TabPane } = Tabs;
-function beforeUpload(file) {
-  /*const isJPG = file.type === 'image/jpeg';
-  if (!isJPG) {
-    message.error('只能上传图片文件!');
-    console.log(file.type);
-  }*/
+function beforeUpload(file,self) {
+  const {fileSize=2} = self.props;
   const isJPG = true;
-  const isLt2M = file.size / 1024 / 1024 < 2;
+  const isLt2M = file.size / 1024 / 1024 < fileSize;
   if (!isLt2M) {
-    message.error('图片不能大于 2MB!');
+    message.error(`图片不能大于 ${fileSize}MB!`);
   }
   return isJPG && isLt2M;
 }
@@ -24,21 +20,24 @@ export default class UploadImageOrOnline extends PureComponent {
     fileList: [],
     meansVisible:false,
   };
-
+  componentDidMount() {
+    // console.log(this.props);
+  }
   //初始化加载数据
   componentWillReceiveProps(nextProps) {
     //console.log(nextProps);
     if (this.props.value !== nextProps.value) {
       if(nextProps.value&&nextProps.value.length !== 32) {
         //在此处也要看是几张图片
-        console.log(window.path+'dist/'+nextProps.value);
+        // console.log(window.path+'dist/'+nextProps.value);
         // 为啥要更新这个呢？
-        // this.setState({fileList: [{
-        //   uid: -1,
-        //   name: 'xxx.png',
-        //   status: 'done',
-        //   url: window.path+'dist/'+nextProps.value,
-        // }]})
+        console.log("为啥要更新这个呢？");
+        this.setState({fileList: [{
+          uid: -1,
+          name: 'xxx.png',
+          status: 'done',
+          url: nextProps.value,
+        }]})
       }
     }
   }
@@ -138,7 +137,7 @@ export default class UploadImageOrOnline extends PureComponent {
       fileList={fileList}
       onPreview={this.handlePreview}
       onChange={this.handleChange}
-      beforeUpload={beforeUpload}
+      beforeUpload={(file)=>{beforeUpload(file,this)}}
       openFileDialogOnClick={meansVisible}
     >
       {fileList.length >= fileLength ? null : uploadButton}
