@@ -153,7 +153,7 @@ export default class UploadImageOrOnline extends PureComponent {
                {realupload}
              </TabPane>
              <TabPane tab="上传文件" key="2">
-               <Input placeholder="请填写图片url" onChange={(e)=>{this.handleInputChange(e.target.value)}}/>
+               <Input placeholder="请填写图片url" onBlur={(e)=>{this.handleInputChange(e.target.value)}}/>
              </TabPane>
            </Tabs>
            <div style={{textAlign:"center",marginTop:"4px"}}>
