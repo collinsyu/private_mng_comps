@@ -21,7 +21,7 @@ export default class UploadImageOrOnline extends PureComponent {
     meansVisible:false,
   };
   componentDidMount() {
-    console.log("did",this.props);
+    // console.log("did",this.props);
     this.setState({fileList: [{
       uid: -1,
       name: 'xxx.png',
@@ -32,13 +32,13 @@ export default class UploadImageOrOnline extends PureComponent {
   //初始化加载数据
   componentWillReceiveProps(nextProps) {
     if (this.props.value !== nextProps.value) {
-      console.log(nextProps);
+      // console.log(nextProps);
 
       if(nextProps.value&&nextProps.value.length !== 32) {
         //在此处也要看是几张图片
         // console.log(window.path+'dist/'+nextProps.value);
         // 为啥要更新这个呢？
-        console.log("为啥要更新这个呢？");
+        // console.log("为啥要更新这个呢？");
         this.setState({fileList: [{
           uid: -1,
           name: 'xxx.png',
@@ -62,7 +62,7 @@ export default class UploadImageOrOnline extends PureComponent {
     const { onChange , fetchfiletokenurl = "upload/image/network"} = this.props;
     // NOTE: 拿到url，去后台换取token
     create(fetchfiletokenurl,{imageUrl}).then((data)=>{
-      console.log(data);
+      // console.log(data);
       let fileTokens= data.fileToken;
       onChange.call(this, fileTokens);
       var _t = (new Date()).getTime();
@@ -94,7 +94,7 @@ export default class UploadImageOrOnline extends PureComponent {
   // 上传多张图片时，应该返回一个列表或者,分
   handleChange = (info) => {
     let fileList = info.fileList;
-    console.log(fileList);
+    // console.log(fileList);
     this.setState({ fileList })
     const { onChange } = this.props;
     if (onChange) {
