@@ -21,13 +21,14 @@ export default class UploadImageOrOnline extends PureComponent {
     meansVisible:false,
   };
   componentDidMount() {
-    // console.log("did",this.props);
-    this.setState({fileList: [{
-      uid: -1,
-      name: 'xxx.png',
-      status: 'done',
-      url: this.props.value,
-    }]})
+    if(this.props.value){
+      this.setState({fileList: [{
+        uid: -1,
+        name: 'xxx.png',
+        status: 'done',
+        url: this.props.value,
+      }]})
+    }
   }
   //初始化加载数据
   componentWillReceiveProps(nextProps) {
