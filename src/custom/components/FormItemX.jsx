@@ -387,14 +387,13 @@ class FormItemX extends Component {
 
     const { modifyDisplay = true,modifyText=false, modifyDisabled=false } = this.props;
     const authCode = this.props.useName + '.' + this.props.name;
-    let display = true;
-    // let display = getAuth(authCode);
-    // if(display) {
+    // let display = true;
+    let display = getAuth(authCode);
+    if(display) {
       if(this.props.modalType === 'update') {
         display =  modifyDisplay;
       }
-
-    // }
+    }
     let isText = this.props.type==='text';
     if(this.props.modalType === 'update') {
 
