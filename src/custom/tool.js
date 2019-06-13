@@ -51,6 +51,15 @@ Array.prototype.contains = function(val)
      return false;
 };
 
+export function getAuthFormItem(name, useName) {
+  let keys = [];
+  let cloumnsAuth = window.cloumnsAuth||{};
+  keys = cloumnsAuth[useName]||[];
+  var _b = keys.contains(name)
+  return _b;
+}
+
+//这是过滤掉表格的显示字段
 export function getAuthColumn(columns, authCode) {
 
   // 先看是否有全部权限，否则细化权限！

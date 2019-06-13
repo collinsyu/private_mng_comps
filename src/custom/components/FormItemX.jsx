@@ -7,7 +7,7 @@ import CheckboxNoLabel from './CheckboxNoLabel';
 import RadioX from './RadioX';
 import RangePickerX from './RangePickerX';
 import {formItemLayout} from '../constants'
-import {getAuth} from '../tool';
+import {getAuth,getAuthColumn,getAuthFormItem} from '../tool';
 import moment from 'moment';
 import UploadImageX from './UploadImageX';
 import UploadImageOrOnline from './UploadImageOrOnline';
@@ -388,8 +388,8 @@ class FormItemX extends Component {
     const { modifyDisplay = true,modifyText=false, modifyDisabled=false } = this.props;
     const authCode = this.props.useName + '.' + this.props.name;
     // let display = true;
-    let display = getAuth(authCode);
-    if(display) {
+    let display = getAuthFormItem(this.props.name,this.props.useName);
+    if(!display) {
       if(this.props.modalType === 'update') {
         display =  modifyDisplay;
       }
