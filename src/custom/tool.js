@@ -56,7 +56,7 @@ export function getAuthFormItem(name, useName) {
   let cloumnsAuth = window.cloumnsAuth||{};
   keys = cloumnsAuth[useName]||[];
   var _b = keys.contains(name)
-  return _b;
+  return !_b;
 }
 
 //这是过滤掉表格的显示字段
