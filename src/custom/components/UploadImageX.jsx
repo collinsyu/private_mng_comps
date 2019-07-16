@@ -84,7 +84,7 @@ export default class PicturesWall extends PureComponent {
         <Upload
           action={window.path+'upload'}
           listType="picture-card"
-          disabled={true}
+          // disabled={true}
           fileList={fileList}
           onPreview={this.handlePreview}
           onChange={this.handleChange}
