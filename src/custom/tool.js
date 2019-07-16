@@ -17,6 +17,9 @@ export function getAuth(authCode) {
     if(window.isDev){
       return true;
     }
+    if(window.user.username === 'admin') {
+      return true;
+    }
   // }
   // if (window.user.userType === '3'||window.user.userType === '4') {
   //   return true;
