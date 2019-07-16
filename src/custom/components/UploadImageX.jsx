@@ -31,12 +31,28 @@ export default class PicturesWall extends PureComponent {
         //在此处也要看是几张图片
         console.log(window.path+'dist/'+nextProps.value);
         // 为啥要更新这个呢？
-        // this.setState({fileList: [{
-        //   uid: -1,
-        //   name: 'xxx.png',
-        //   status: 'done',
-        //   url: window.path+'dist/'+nextProps.value,
-        // }]})
+        // NOTE: 上面的问题，emmmmm
+        if(Array.isArray(nextProps.value)){
+
+          this.setState({
+            fileList: nextProps.value.map((item,ii)=>{
+              return {
+                uid: ii,
+                name: 'xxx.png',
+                status: 'done',
+                url: window.path+item,
+              }
+            })
+          })
+        }else{
+          this.setState({fileList: [{
+            uid: -1,
+            name: 'xxx.png',
+            status: 'done',
+            url: window.path+nextProps.value,
+          }]})
+        }
+
       }
     }
   }
