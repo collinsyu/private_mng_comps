@@ -25,7 +25,7 @@ export default class PicturesWall extends PureComponent {
 
   //初始化加载数据
   componentWillReceiveProps(nextProps) {
-    console.warn(nextProps);
+    // console.warn(nextProps);
     if (this.props.value !== nextProps.value) {
       this.setState({fileList:nextProps.value})
         // if(Array.isArray(nextProps.value)){
@@ -66,7 +66,7 @@ export default class PicturesWall extends PureComponent {
     const { onChange } = this.props;
     if (onChange) {
       // 在此处需要看状态，如果token存在就
-      if (info.file.status === 'done') {
+      if (info.file.status === 'done'||info.file.status === 'removed') {
         // Get this url from response in real world.
         //上传成功 目前这样只能是单个文件，当有多个文件时，需要在此处处理
         // let fileTokens= fileList.map((file)=> file.response.fileToken);
@@ -80,6 +80,8 @@ export default class PicturesWall extends PureComponent {
           }
 
         });
+        // console.warn("发生了变化",fileList);
+
         onChange.call(this, fileList);
       }
     }
