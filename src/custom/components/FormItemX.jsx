@@ -9,7 +9,7 @@ import RangePickerX from './RangePickerX';
 import {formItemLayout} from '../constants'
 import {getAuth,getAuthColumn,getAuthFormItem} from '../tool';
 import moment from 'moment';
-import UploadImageX from './UploadImageX';
+import UploadImageXForm from './UploadImageXForm';
 import UploadImageOrOnline from './UploadImageOrOnline';
 import UploadX from './UploadX';
 import _ from "lodash"
@@ -283,7 +283,7 @@ class FormItemX extends Component {
         let uiOpts = {...typeOpts};
         delete uiOpts.all;
         delete uiOpts.typeName;
-        return <UploadImageX {...uiOpts}/>;
+        return <UploadImageXForm {...uiOpts}/>;
 
       case 'uploadimageonmodal':
         let uimOpts = {...typeOpts};
@@ -402,6 +402,7 @@ class FormItemX extends Component {
 
     // console.log(initValue);
     const _intValue = this.renderInitValue();
+
     return (display ?
       <FormItem {...defaultOpts} {...this.props}>
         {isText?this.renderInitValueToText(_intValue):
