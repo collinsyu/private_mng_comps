@@ -14,6 +14,7 @@ class Drawer extends PureComponent {
   };
 
   render() {
+    var width = this.props.width;
     return (
       <div className={"_yhq_drawer"}>
         <QueueAnim key="drawer" type={['right', 'right']} ease={['easeOutQuart', 'easeInOutQuart']}>
@@ -21,7 +22,7 @@ class Drawer extends PureComponent {
             ? (
               <div key='absolute' className={"_yhq_absolute"}>
                 <div className={"_yhq_masklayer"} onClick={this.props.onCancel}></div>
-                <div className={"_yhq_container"}>
+                <div className={"_yhq_container"} style={{width:width}}>
                   <div className={"_yhq_head"}>
                     <span className={"_yhq_title"}>{this.state.title}</span>
                     <Icon onClick={this.props.onCancel} className={"_yhq_close"} type="close"/>
