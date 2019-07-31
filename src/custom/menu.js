@@ -1,6 +1,6 @@
 
 
-const menuData = window.menus;
+const menuData = window.menus||[];
 
 function formatter(data, parentPath = '', parentAuthority) {
   return data.map((item) => {
