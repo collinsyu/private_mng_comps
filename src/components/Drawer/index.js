@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Icon} from 'antd'
 import QueueAnim from 'rc-queue-anim';
+import Debounce from 'lodash-decorators/debounce';
 
 class Drawer extends PureComponent {
   constructor(props) {
@@ -9,12 +10,48 @@ class Drawer extends PureComponent {
       visible: this.props.visible,
       title: this.props.title || '',
       // footString: this.props.footString || '',
-      buttonLabel: this.props.buttonLabel || ''
+      buttonLabel: this.props.buttonLabel || '',
+      width:0,
     };
+    this.ishold = false;
   };
+ 
+  componentDidMount = ()=>{
+  }
 
+  componentWillUnmount = ()=>{
+    document.removeEventListener("mousemove",this.onMouseMove)
+  }
+  @Debounce(400)
+  onMouseMove = (e)=>{
+    console.warn("监听鼠标移动");
+    
+    if(this.ishold){
+      
+      var width = document.body.clientWidth - e.clientX
+      if(width>=document.body.clientWidth){
+        width = document.body.clientWidth - 100
+      }
+      this.container.style.width = width + "px";
+    }
+  }
+  onMouseDown = ()=>{
+    document.addEventListener("mousemove",this.onMouseMove)
+    this.ishold = true; 
+    
+  }
+  onMouseUp = ()=>{
+    document.removeEventListener("mousemove",this.onMouseMove)
+    this.ishold = false;
+    console.warn("up");
+    
+  }
+ 
+  resize = (width)=>{
+    this.setState({width})
+  }
   render() {
-    var width = this.props.width;
+    var width = this.state.width || this.props.width;
     return (
       <div className={"_yhq_drawer"}>
         <QueueAnim key="drawer" type={['right', 'right']} ease={['easeOutQuart', 'easeInOutQuart']}>
@@ -22,19 +59,23 @@ class Drawer extends PureComponent {
             ? (
               <div key='absolute' className={"_yhq_absolute"}>
                 <div className={"_yhq_masklayer"} onClick={this.props.onCancel}></div>
-                <div className={"_yhq_container"} style={{width:width}}>
-                  <div className={"_yhq_head"}>
-                    <span className={"_yhq_title"}>{this.state.title}</span>
-                    <Icon onClick={this.props.onCancel} className={"_yhq_close"} type="close"/>
+                <div className={"_yhq_container"} style={{width:width}} ref={container=>this.container = container}>
+                  <div className="_yhq_leftborder"
+                  onMouseDown={this.onMouseDown}
+                  onMouseUp={this.onMouseUp}></div>
+                  <div style={{flex:"1 0"}}>
+                    <div className={"_yhq_head"}>
+                      <span className={"_yhq_title"}>{this.state.title}</span>
+                      <Icon onClick={this.props.onCancel} className={"_yhq_close"} type="close"/>
 
+                    </div>
+                    <div className={"_yhq_body"} style={{maxHeight: document.body.clientHeight-(this.props.footString?80:40)}}>
+                      {this.props.children}
+                    </div>
+                    {this.props.footString?<div className={"_yhq_foot"}>
+                      {this.props.footString}
+                    </div>:null}
                   </div>
-                  <div className={"_yhq_body"} style={{maxHeight: document.body.clientHeight-(this.props.footString?80:40)}}>
-                    {this.props.children}
-                  </div>
-                  {this.props.footString?<div className={"_yhq_foot"}>
-                    {this.props.footString}
-                  </div>:null}
-
 
                 </div>
               </div>
@@ -62,6 +103,7 @@ class Drawer extends PureComponent {
             width: 100%;
           }
           ._yhq_drawer ._yhq_container {
+            display:flex;
             -moz-box-shadow: -1px 0 20px #757474;
             -webkit-box-shadow: -1px 0 20px #757474;
             box-shadow: -1px 0 20px #757474;
@@ -73,6 +115,14 @@ class Drawer extends PureComponent {
             height: 100%;
             width: 50%;
             background: #fff;
+          }
+          ._yhq_leftborder{
+            width: 3px;
+            flex-shrink: 0;
+            margin-left: -1.5px;
+          }
+          ._yhq_leftborder:hover{
+            cursor:ew-resize;
           }
           ._yhq_drawer ._yhq_body {
             padding: 20px;
