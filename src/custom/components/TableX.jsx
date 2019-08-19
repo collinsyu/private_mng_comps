@@ -2,9 +2,32 @@ import React, {PureComponent} from 'react';
 import {Table,Alert,message} from 'antd';
 import {getAuthColumn} from '../tool';
 import _ from "lodash";
+import { Resizable } from 'react-resizable';
 // import DbclickCopySpan from "./DbclickCopySpan";
 import Ellipsis from "../../components/Ellipsis";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+
+
+const ResizeableTitle = props => {
+  const { onResize, width, ...restProps } = props;
+
+  if (!width) {
+    return <th {...restProps} />;
+  }
+
+  return (
+    <Resizable
+      width={width}
+      height={0}
+      onResize={onResize}
+      draggableOpts={{ enableUserSelectHack: false }}
+    >
+      <th {...restProps} />
+    </Resizable>
+  );
+};
+
+
 
 
 /**
@@ -114,14 +137,36 @@ class TableX extends PureComponent {
 
     return _bbb
   }
-
+  handleResize = index => (e, { size }) => {
+    this.setState(({ columns }) => {
+      const nextColumns = [...columns];
+      nextColumns[index] = {
+        ...nextColumns[index],
+        width: size.width,
+      };
+      return { columns: nextColumns };
+    });
+  };
+  components = {
+    header: {
+      cell: ResizeableTitle,
+    },
+  };
   render() {
     const { selectedRowKeys } = this.state;
     // 进行权限控制
     const columns=getAuthColumn(this.props.columns, this.props.useName);
-
+   
     // NOTE: 修饰columns
-    const _columns = this.modifyC(columns)
+    var _columns = this.modifyC(columns)
+    _columns = _columns.map((col, index) => ({
+      ...col,
+      onHeaderCell: column => ({
+        width: column.width,
+        onResize: this.handleResize(index),
+      }),
+    }));
+
     const _tableOpts = {
       rowKey:record => record.id ,
       ...this.props,
@@ -137,6 +182,8 @@ class TableX extends PureComponent {
       }),
     };
 
+
+
     return (
       <div>
         <div >
@@ -144,7 +191,7 @@ class TableX extends PureComponent {
           <Alert
             message={(
               <div>
-                已选择 <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> 项&nbsp;&nbsp; {/*更多的显示可以由调用者进行处理*/}
+                已选择aaaa <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> 项&nbsp;&nbsp; {/*更多的显示可以由调用者进行处理*/}
                 <a onClick={this.cleanSelectedKeys} style={{ marginLeft: 24 }}>清空</a>
               </div>
             )}
@@ -152,7 +199,13 @@ class TableX extends PureComponent {
             showIcon
           />}
         </div>
-        <Table size="small" {..._tableOpts} onChange={_onChange} rowSelection={this.props.shwoRows&&rowSelection}/>
+        <Table size="small" 
+         scroll={{x:'max-content'}}
+        {..._tableOpts} 
+        onChange={_onChange} 
+        rowSelection={this.props.shwoRows&&rowSelection}
+        components={this.components}
+        />
       </div>
     );
   }
