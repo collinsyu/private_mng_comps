@@ -1,3 +1,5 @@
+import { COMMENT } from '_postcss-selector-parser@3.1.1@postcss-selector-parser';
+
 // 组件
 
 
@@ -49,3 +51,17 @@ export {filterQueryData} from './lib/utils/queryTool';
 // 在开发
 // 暂时先不暴露，单独引用
 // export { default as MarkdownViewer } from './lib/custom/plugins/markdownViewer/viewer';
+
+
+
+
+
+// DESCRIBE: 2019-08-02 13:53:00 重新开发2.0.0接口 
+
+
+// form 组件 1. formitem 2. 添加search 3. 添加normalform 4. stepform
+
+
+
+
+// 

@@ -9,9 +9,7 @@ function WrapAuth(WrappedComponent) {
     };
 
     render() {
-      let allprops = {
-        ...this.props
-      };
+      let allprops = JSON.parse(JSON.stringify(this.props));
       delete allprops.auth;
       // 如果没有权限，需要不同的提示方式
       if (getAuth(this.props.auth)) {
