@@ -176,7 +176,9 @@ class TableX extends PureComponent {
         onResize: this.handleResize(index),
       }),
     }));
-
+    if(this.props.pagination){
+      this.props.pagination.showQuickJumper = true
+    }
     const _tableOpts = {
       rowKey:record => record.id ,
       ...this.props,
