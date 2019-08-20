@@ -98,7 +98,7 @@ class TableX extends PureComponent {
     // console.log(columns);
     var _bbb = _.cloneDeep(columns);
     // console.info(_bbb);;;
-    _bbb.map((dou)=>{
+    _bbb.map((dou,_ii)=>{
       // NOTE: 添加copied属性
       var _formatDom_fn = dou.render;
       // NOTE: 添加省略属性
@@ -133,8 +133,13 @@ class TableX extends PureComponent {
         }
       }
       dou.render = _formatDom_fn;
+     
     })
-
+     // NOTE: 2019-08-20 12:38:27 如果是最后一列，那么没有单独设置fixed=false的话，就默认fixed
+    var _last = _bbb[_bbb.length-1];
+    if(_last.fixed==undefined){
+      _last.fixed = "right";
+    }
     return _bbb
   }
   handleResize = index => (e, { size }) => {
