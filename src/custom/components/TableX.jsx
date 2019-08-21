@@ -136,14 +136,18 @@ class TableX extends PureComponent {
      
     })
      // NOTE: 2019-08-20 12:38:27 如果是最后一列，那么没有单独设置fixed=false的话，就默认fixed
-    var _last = _bbb[_bbb.length-1];
-    if(_last.fixed==undefined){
-      if(_bbb.length>5){
-
-        _last.fixed = "right";
+    var fixedLast = thi.props.fixedLast;
+    if(fixedLast){
+      var _last = _bbb[_bbb.length-1];
+      if(_last.fixed==undefined){
+        if(_bbb.length>5){
+  
+          _last.fixed = "right";
+        }
+        // _last.width = "200px"
       }
-      // _last.width = "200px"
     }
+     
     
     return _bbb
   }
@@ -179,10 +183,14 @@ class TableX extends PureComponent {
     if(this.props.pagination){
       this.props.pagination.showQuickJumper = true
     }
+    var needScroll = this.props.needScroll;
     const _tableOpts = {
       rowKey:record => record.id ,
       ...this.props,
-      columns:_columns
+      columns:_columns,
+    }
+    if(needScroll){
+      _tableOpts.scroll = {x:'max-content'}
     }
     const _onChange = this.props.onChange ? this.props.onChange : this.onPageChange;
 
@@ -211,8 +219,7 @@ class TableX extends PureComponent {
             showIcon
           />}
         </div>
-        <Table size="small" 
-         scroll={{x:'max-content'}}
+        <Table size="small"
         {..._tableOpts} 
         onChange={_onChange} 
         rowSelection={this.props.shwoRows&&rowSelection}
