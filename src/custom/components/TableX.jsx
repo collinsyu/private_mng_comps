@@ -211,7 +211,7 @@ class TableX extends PureComponent {
           <Alert
             message={(
               <div>
-                已选择aaaa <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> 项&nbsp;&nbsp; {/*更多的显示可以由调用者进行处理*/}
+                已选择 <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> 项&nbsp;&nbsp; {/*更多的显示可以由调用者进行处理*/}
                 <a onClick={this.cleanSelectedKeys} style={{ marginLeft: 24 }}>清空</a>
               </div>
             )}
