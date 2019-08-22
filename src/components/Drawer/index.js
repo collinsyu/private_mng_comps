@@ -63,7 +63,7 @@ class Drawer extends PureComponent {
                   <div className="_yhq_leftborder"
                   onMouseDown={this.onMouseDown}
                   onMouseUp={this.onMouseUp}></div>
-                  <div style={{flex:"1 0"}}>
+                  <div style={{flex:"1 0",width:"100%",overflow:"hidden"}}>
                     <div className={"_yhq_head"}>
                       <span className={"_yhq_title"}>{this.state.title}</span>
                       <Icon onClick={this.props.onCancel} className={"_yhq_close"} type="close"/>
