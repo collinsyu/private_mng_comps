@@ -1,4 +1,4 @@
-
+import React from "React"
 
 // export function _pagination(target){
 //     console.log(target)
