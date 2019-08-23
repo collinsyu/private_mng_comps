@@ -260,4 +260,20 @@ Object.defineProperty(exports, 'filterQueryData', {
   }
 });
 
+var _decorators = require('./lib/utils/decorators');
+
+Object.keys(_decorators).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _decorators[key];
+    }
+  });
+});
+
+// 在开发
+// 暂时先不暴露，单独引用
+// export { default as MarkdownViewer } from './lib/custom/plugins/markdownViewer/viewer';
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+// import decorators from "./lib/utils/decorators";
