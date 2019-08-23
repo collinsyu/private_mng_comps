@@ -1,6 +1,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.decorators = exports.filterQueryData = exports.reqwithWholeUrl = exports.request = exports.Popinfo = exports.PopconfirmButton = exports.Drawer = exports.Ellipsis = exports.DescriptionList = exports.SearchTree = exports.EditableCell = exports.AuthA = exports.WrapAuth = exports.UploadImageX = exports.QuickTool = exports.SearchTable = exports.TableX = exports.FormItemXGen = exports.FormItemX = exports.RowCallList = exports.EditSpanCell = exports.DbclickCopySpan = exports.SlipOutModal = exports.RangePickerX = exports.CheckboxX = exports.SelectX = exports.PageHeaderLayout = exports.TwoBlocksLayouts = exports.WLayout = exports.BasicLayout = undefined;
 
 var _BasicLayout = require('./lib/layouts/BasicLayout');
 
@@ -260,20 +261,16 @@ Object.defineProperty(exports, 'filterQueryData', {
   }
 });
 
-var _decorators = require('./lib/utils/decorators');
+var _decorator = require('./lib/utils/decorator');
 
-Object.keys(_decorators).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _decorators[key];
-    }
-  });
-});
+var decorators = _interopRequireWildcard(_decorator);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.decorators = decorators;
 
 // 在开发
 // 暂时先不暴露，单独引用
 // export { default as MarkdownViewer } from './lib/custom/plugins/markdownViewer/viewer';
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-// import decorators from "./lib/utils/decorators";
