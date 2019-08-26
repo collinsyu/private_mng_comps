@@ -190,7 +190,7 @@ class TableX extends PureComponent {
       columns:_columns,
     }
     if(needScroll){
-      Object.assign(_tableOpts.scroll||{},{x:'max-content'})
+      _tableOpts.scroll = Object.assign(_tableOpts.scroll||{},{x:'max-content'})
       // _tableOpts.scroll = {x:'max-content'}
     }
     const _onChange = this.props.onChange ? this.props.onChange : this.onPageChange;
