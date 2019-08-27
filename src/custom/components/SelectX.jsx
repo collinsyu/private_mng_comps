@@ -36,11 +36,16 @@ class SelectX extends Component {
     }
   };
   render() {
+    const {typeName,...restProps} = this.props
     return (
       <div>
         <Select
           dropdownMatchSelectWidth={false}
-          style={{width:"100%",minWidth:"120px"}} onChange={this.handleChange} placeholder="请选择" showSearch optionFilterProp="pinyin" notFoundContent="无法找到" {...this.props}>
+          style={{width:"100%",minWidth:"120px"}} 
+          onChange={this.handleChange} 
+          placeholder="请选择" showSearch 
+          optionFilterProp="pinyin" 
+          notFoundContent="无法找到" {...restProps}>
           {this.getUserType()}
         </Select>
       </div>
