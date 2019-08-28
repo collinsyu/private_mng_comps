@@ -11,7 +11,21 @@ const { Header } = Layout;
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
+// if (!String.prototype.startsWith) {
+// // 	String.prototype.startsWith = function(search, pos) {
+// // 		return this.substr(!pos || pos < 0 ? 0 : +pos, search.length) === search;
+// // 	};
+// // }
 
+function renderLink(item){
+  if(!item.url){
+    return item.label;
+  }
+  if(item.url.startsWith("https://")||item.url.startsWith("http://")){
+    return <a href={item.url} target="_blank">{item.label}</a>
+  }
+  return <Link to={item.url}  key="logo">{item.label}</Link>
+}
 function _nest(_arr,str){
   _arr = _arr || [];
   return _arr.map(function(item,ii){
@@ -22,7 +36,7 @@ function _nest(_arr,str){
         </SubMenu>
       )
     }else{
-      return <Menu.Item key={str+"-"+ii}><a href={item.url} target="_blank">{item.label}</a></Menu.Item>
+      return <Menu.Item key={str+"-"+ii}>{renderLink(item)}</Menu.Item>
     }
   })
 }
@@ -72,7 +86,6 @@ export default class GlobalHeader extends PureComponent {
 
   renderSubmenu(){
     var headerMenu = window.headerMenu||[];
-
     return (
       <Menu
         mode="horizontal"
