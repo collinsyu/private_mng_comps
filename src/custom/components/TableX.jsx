@@ -2,9 +2,32 @@ import React, {PureComponent} from 'react';
 import {Table,Alert,message} from 'antd';
 import {getAuthColumn} from '../tool';
 import _ from "lodash";
+import { Resizable } from 'react-resizable';
 // import DbclickCopySpan from "./DbclickCopySpan";
 import Ellipsis from "../../components/Ellipsis";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+
+
+const ResizeableTitle = props => {
+  const { onResize, width, ...restProps } = props;
+
+  if (!width) {
+    return <th {...restProps} />;
+  }
+
+  return (
+    <Resizable
+      width={width}
+      height={0}
+      onResize={onResize}
+      draggableOpts={{ enableUserSelectHack: false }}
+    >
+      <th {...restProps} />
+    </Resizable>
+  );
+};
+
+
 
 
 /**
@@ -75,7 +98,7 @@ class TableX extends PureComponent {
     // console.log(columns);
     var _bbb = _.cloneDeep(columns);
     // console.info(_bbb);;;
-    _bbb.map((dou)=>{
+    _bbb.map((dou,_ii)=>{
       // NOTE: 添加copied属性
       var _formatDom_fn = dou.render;
       // NOTE: 添加省略属性
@@ -110,22 +133,65 @@ class TableX extends PureComponent {
         }
       }
       dou.render = _formatDom_fn;
+     
     })
-
+     // NOTE: 2019-08-20 12:38:27 如果是最后一列，那么没有单独设置fixed=false的话，就默认fixed
+    var fixedLast = this.props.fixedLast;
+    if(fixedLast){
+      var _last = _bbb[_bbb.length-1];
+      if(_last.fixed==undefined){
+        if(_bbb.length>5){
+  
+          _last.fixed = "right";
+        }
+        // _last.width = "200px"
+      }
+    }
+     
+    
     return _bbb
   }
-
+  handleResize = index => (e, { size }) => {
+    this.setState(({ columns }) => {
+      const nextColumns = [...columns];
+      nextColumns[index] = {
+        ...nextColumns[index],
+        width: size.width,
+      };
+      return { columns: nextColumns };
+    });
+  };
+  components = {
+    header: {
+      cell: ResizeableTitle,
+    },
+  };
   render() {
     const { selectedRowKeys } = this.state;
     // 进行权限控制
     const columns=getAuthColumn(this.props.columns, this.props.useName);
-
+   
     // NOTE: 修饰columns
-    const _columns = this.modifyC(columns)
+    var _columns = this.modifyC(columns)
+    _columns = _columns.map((col, index) => ({
+      ...col,
+      onHeaderCell: column => ({
+        width: column.width,
+        onResize: this.handleResize(index),
+      }),
+    }));
+    if(this.props.pagination){
+      this.props.pagination.showQuickJumper = true
+    }
+    var needScroll = this.props.needScroll;
     const _tableOpts = {
       rowKey:record => record.id ,
       ...this.props,
-      columns:_columns
+      columns:_columns,
+    }
+    if(needScroll){
+      _tableOpts.scroll = Object.assign(_tableOpts.scroll||{},{x:'max-content'})
+      // _tableOpts.scroll = {x:'max-content'}
     }
     const _onChange = this.props.onChange ? this.props.onChange : this.onPageChange;
 
@@ -136,6 +202,8 @@ class TableX extends PureComponent {
         disabled: record.disabled,
       }),
     };
+
+
 
     return (
       <div>
@@ -152,7 +220,12 @@ class TableX extends PureComponent {
             showIcon
           />}
         </div>
-        <Table size="small" {..._tableOpts} onChange={_onChange} rowSelection={this.props.shwoRows&&rowSelection}/>
+        <Table size="small"
+        {..._tableOpts} 
+        onChange={_onChange} 
+        rowSelection={this.props.shwoRows&&rowSelection}
+        components={this.components}
+        />
       </div>
     );
   }

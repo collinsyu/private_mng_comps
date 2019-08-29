@@ -1,11 +1,22 @@
 import React, {Component} from 'react';
-import {Form, Input, Modal, message,Alert} from 'antd';
+import {Form, Input, Modal, message,Alert,Popover,Progress} from 'antd';
 import request from '../utils/request';
 import qs from 'qs';
+import styles from './style.less';
+
 
 const FormItem = Form.Item;
 
-
+const passwordStatusMap = {
+  ok: <div className={styles.success}>强度：强</div>,
+  pass: <div className={styles.warning}>强度：中</div>,
+  poor: <div className={styles.error}>强度：太短</div>,
+};
+const passwordProgressMap = {
+  ok: 'success',
+  pass: 'normal',
+  poor: 'exception',
+};
 var testP = {
   regex: {
     illegal: /[^-+=|,0-9a-zA-Z!@#$%^&*?_.~+\/\\(){}\[\]<>]/,
@@ -70,7 +81,8 @@ class ModifyPassModel extends Component {
     super(props);
     this.state = {
       visible: this.props.visible,
-      confirmDirty: false
+      confirmDirty: false,
+      popvisible: false,
     };
   };
 
@@ -120,30 +132,86 @@ class ModifyPassModel extends Component {
     }
   }
   checkConfirm = (rule, value, callback) => {
-    if(value.length < 6){
-      return callback("密码太短了")
+    const { popvisible, confirmDirty } = this.state;
+
+    if (!value) {
+      this.setState({
+        help: '请输入密码！',
+        popvisible: !!value,
+      });
+      return callback('error');
+    }
+
+    this.setState({
+      help: '',
+    });
+    if (!popvisible) {
+      this.setState({
+        popvisible: !!value,
+      });
+    }
+    if(value.length < 9){
+      return callback("密码至少8位以上")
     }
     if(testP.isIllegal(value)){
       return callback("密码不能含有特殊符号")
     }
+    if(!testP.hasNumber(value)){
+      return callback("密码必须包含数字")
+    }
+    if(!testP.hasCharacter(value)){
+      return callback("密码必须包含特殊字符如：@#¥%……&*")
+    }
+    if(!testP.hasLowerAndUpperLetter(value)){
+      return callback("密码必须包含大小写字母")
+    }
+    
     if(!(!!(testP.hasNumber(value) && testP.hasLetter(value) || testP.hasNumber(value) && testP.hasCharacter(value) || testP.hasLetter(value) && testP.hasCharacter(value)))){
       return callback("密码设置不符合要求，应包含数字大小写字母")
     }
 
     const form = this.props.form;
-    if (value && this.state.confirmDirty) {
+    if (value && confirmDirty) {
       form.validateFields(['confirm'], {force: true});
     }
     callback();
   }
+  getPasswordStatus = () => {
+    const { form } = this.props;
+    const value = form.getFieldValue('password');
 
+    if (value && value.length > 9) {
+      return 'ok';
+    }
+
+    if (value && value.length > 5) {
+      return 'pass';
+    }
+
+    return 'poor';
+  };
   handleConfirmBlur = (e) => {
     const value = e.target.value;
     this.setState({
       confirmDirty: this.state.confirmDirty || !!value
     });
   }
-
+  renderPasswordProgress = () => {
+    const { form } = this.props;
+    const value = form.getFieldValue('password');
+    const passwordStatus = this.getPasswordStatus();
+    return value && value.length ? (
+      <div className={styles[`progress-${passwordStatus}`]}>
+        <Progress
+          status={passwordProgressMap[passwordStatus]}
+          className={styles.progress}
+          strokeWidth={6}
+          percent={value.length * 10 > 100 ? 100 : value.length * 10}
+          showInfo={false}
+        />
+      </div>
+    ) : null;
+  };
   render() {
     const {children,isNeedResetPassword} = this.props;
     const modalOpts = {
@@ -178,7 +246,7 @@ class ModifyPassModel extends Component {
         }
       }
     };
-
+    const {popvisible} = this.state;
     return (
       <span>
         <span onClick={this.showModelHandler}>
@@ -200,7 +268,39 @@ class ModifyPassModel extends Component {
               })(<Input type="password"/>)}
             </FormItem>
 
-            <FormItem {...formItemLayout} label="新密码" hasFeedback>
+            <Popover
+              getPopupContainer={node => {
+                if (node && node.parentNode) {
+                  return node.parentNode;
+                }
+
+                return node;
+              }}
+              content={
+                <div
+                  style={{
+                    padding: '4px 0',
+                  }}
+                >
+                  {passwordStatusMap[this.getPasswordStatus()]}
+                  {this.renderPasswordProgress()}
+                  <div
+                    style={{
+                      marginTop: 10,
+                    }}
+                  >
+                    请至少输入 8 个字符。包含字母大小写+数字+特殊字符。
+
+                  </div>
+                </div>
+              }
+              overlayStyle={{
+                width: 240,
+              }}
+              placement="right"
+              visible={popvisible}
+            >
+              <FormItem {...formItemLayout} label="新密码" hasFeedback>
               {getFieldDecorator('password', {
                 rules: [
                   {
@@ -213,6 +313,8 @@ class ModifyPassModel extends Component {
                 ]
               })(<Input type="password"/>)}
             </FormItem>
+            </Popover>
+            
             <FormItem {...formItemLayout} label="确认新密码" hasFeedback>
               {getFieldDecorator('confirm', {
                 rules: [
