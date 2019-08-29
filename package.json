@@ -1,5 +1,5 @@
 {
-  "name": "umi_zjhs_mng_comps",
+  "name": "private_mng_comps",
   "version": "1.0.0",
   "description": "后台常用组件维护",
   "main": "index.js",
@@ -14,7 +14,7 @@
   ],
   "author": "yuhaiqing",
   "license": "ISC",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@antv/data-set": "^0.8.0",
     "@babel/polyfill": "^7.0.0-beta.36",
