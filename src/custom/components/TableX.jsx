@@ -69,6 +69,7 @@ class TableX extends PureComponent {
     const queryData = {
       ...this.props.searchItem,
       page: pagination.current,
+      pageSize: pagination.pageSize,
       sortField: sorter.field,
       sortOrder: sorter.order
     }
@@ -194,7 +195,7 @@ class TableX extends PureComponent {
       // _tableOpts.scroll = {x:'max-content'}
     }
     const _onChange = this.props.onChange ? this.props.onChange : this.onPageChange;
-
+    
     const rowSelection = {
       selectedRowKeys,
       onChange: this.handleRowSelectChange,
