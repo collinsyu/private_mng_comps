@@ -6,6 +6,7 @@ import CheckboxX from './CheckboxX';
 import CheckboxNoLabel from './CheckboxNoLabel';
 import RadioX from './RadioX';
 import RangePickerX from './RangePickerX';
+import RangePickerY from './RangePickerY/index.js';
 import {formItemLayout} from '../constants'
 import {getAuth,getAuthColumn,getAuthFormItem} from '../tool';
 import moment from 'moment';
@@ -172,6 +173,24 @@ class FormItemX extends Component {
     return <RangePickerX {...opts} onChange={(value)=>props.onChange&&props.onChange(props.name,value)}/>;
   };
 
+  transformRangePickerY = (props) => {
+    // const obj2 = {...obj1}; 属于对象浅拷贝
+    let opts = {...props.typeOpts};
+    if(this.props.search) {
+      opts = {...props.typeOpts, style:{width: 210}}
+    }
+    return <RangePickerY {...opts} onChange={(value)=>{
+      if(props.onChange){
+        if(this.props.start){
+          props.onChange(this.props.start,value[0].format("YYYY-MM-DD"))
+        }
+        if(this.props.end){
+          props.onChange(this.props.end,value[1].format("YYYY-MM-DD"))
+        }
+        props.onChange(props.name,value)
+      }
+    }}/>;
+  };
   getFormItem = () => {
     let type = this.props.type;
     if(!type) {
@@ -235,6 +254,9 @@ class FormItemX extends Component {
         return <RadioX {...typeOpts} onChange={(value)=>this.props.onChange&&this.props.onChange(this.props.name,value.target.value)}/>;
       case 'rangepickerx':
         return this.transformRangePickerX(this.props);
+      case 'rangepickery':
+        return this.transformRangePickerY(this.props);
+         
       case 'datepicker':
         return <DatePicker {...typeOpts}  placeholder={placeholder}/>;
       case 'textarea':
@@ -331,7 +353,20 @@ class FormItemX extends Component {
 
       initValue = rangePickerData;
     }
+    if(type === 'rangepickery') {
+      let rangePickerData = [];
+      rangePickerData.push(moment());
+      rangePickerData.push(moment());
+      
+      if(formItem) {
+        if (formItem[start] && formItem[end]) {
+          rangePickerData.push(moment(formItem[start], 'YYYY-MM-DD'));
+          rangePickerData.push(moment(formItem[end], 'YYYY-MM-DD'));
+        }
+      }
 
+      initValue = rangePickerData;
+    }
     if(type === 'datepicker') {
       if (formItem[name]) {
         try {
@@ -399,7 +434,12 @@ class FormItemX extends Component {
 
         isText =  modifyText;
     }
-
+    if(this.props.start){
+      this.props.getFieldDecorator(this.props.start, { initialValue: moment().format("YYYY-MM-DD") });
+    }
+    if(this.props.end){
+      this.props.getFieldDecorator(this.props.end, { initialValue: moment().format("YYYY-MM-DD") });
+    }
     // console.log(initValue);
     const _intValue = this.renderInitValue();
 
