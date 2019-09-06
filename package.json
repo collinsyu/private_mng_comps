@@ -1,6 +1,6 @@
 {
   "name": "private_mng_comps",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "后台常用组件维护",
   "main": "index.js",
   "scripts": {
