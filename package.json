@@ -7,6 +7,7 @@
     "clean": "rm -rf lib && mkdir lib",
     "cpless": "node script.js",
     "lib": "babel src --out-dir lib && node script.js && npm run lib:index",
+    "libts": "tsc && node script.js && npm run lib:index",
     "lib:index": "babel index.es6.js --out-file index.js"
   },
   "files": [
@@ -47,7 +48,8 @@
     "react-copy-to-clipboard": "^5.0.1",
     "react-document-title": "^2.0.3",
     "react-dom": "^16.2.0",
-    "react-fittext": "^1.0.0"
+    "react-fittext": "^1.0.0",
+    "typescript": "^3.6.3"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.0.0-beta.36",
