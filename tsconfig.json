@@ -1,10 +1,27 @@
+
+
 {
     "compilerOptions": {
-        "outDir": "./buildts",
         "allowJs": true,
-        "target": "es5"
+
+      "target": "esnext",
+      "module": "esnext",
+      "moduleResolution": "node",
+      "noImplicitAny": false,
+      "importHelpers": true,
+      "esModuleInterop": true,
+      "sourceMap": true,
+      "jsx": "react",
+      "baseUrl": ".",
+      "strict": true,
+      "experimentalDecorators": true,
+      "paths": {
+        "@/*": ["src/*"]
+      },
+      "allowSyntheticDefaultImports": true
     },
     "include": [
         "./src/**/*"
     ]
-}
+  }
+  
